@@ -12,7 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -23,10 +25,11 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
 
-  declarations: [AppComponent, HomeComponent, SignInComponent],
+  declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
