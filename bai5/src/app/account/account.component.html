@@ -1,27 +1,35 @@
- <div class="container mt-5">
+<div class="container mt-5">
   <table class="table table-striped">
     <thead>
-        <tr>
-          <th>#</th>
-          <th>Balance</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Email</th>
-          <th>City</th>
-        </tr>
+      <tr>
+        <th >#</th>
+        <th>Balance</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>City</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of Users">
-        <td>{{ user.account_number }}</td>
-        <td>{{ user.balance }}</td>
-        <td>{{ user.firstname }} {{ user.lastname }}</td>
-
-        <td>{{ user.age}}</td>
-        <td>{{user.gender}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.city}}</td>
+        <td  >{{ user.account_number }}</td>
+        <td >{{ user.balance }}</td>
+        <td >{{ user.firstname }} {{ user.lastname }}</td>
+        <td >{{ user.age }}</td>
+        <td >{{ user.gender }}</td>
+        <td >{{ user.email }}</td>
+        <td >{{ user.city }}</td>
       </tr>
     </tbody>
   </table>
+    <mat-paginator
+      [pageSizeOptions]="[15,30, 50]"
+      [length]="Users.length "
+      [pageSize]="15"
+      showFirstLastButtons
+      aria-label="Select page"
+    >
+    </mat-paginator>
+
 </div>
