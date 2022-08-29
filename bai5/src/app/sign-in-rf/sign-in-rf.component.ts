@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class SignInRfComponent implements OnInit {
   signInForm = this.fb.group({
     username: '',
+   
     password: '',
     rememberMe: false,
   });

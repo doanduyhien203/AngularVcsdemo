@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
 import { RegisterComponent } from './register/register.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule
   ],
 
-  declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent],
+  declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent,AccountComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

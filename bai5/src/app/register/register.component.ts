@@ -10,6 +10,7 @@ import { map, Observable, Subject, timer, tap, take, startWith } from 'rxjs';
 import { ApiService } from './api.service';
 import { filter, switchMap } from 'rxjs/operators';
 const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{6,32}$/;
+const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{6,32}$/;
 const validateUsernameFromApi = (api: ApiService) => {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     return api.validateUsername(control.value).pipe(
@@ -77,6 +78,14 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^[a-z]{6,32}$/i),
         ]),
         validateUsernameFromApiDebounce(this.api),
+      ],
+      email:[
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(EMAIL_PATTERN),
+        ]),
       ],
       password: [
         '',
