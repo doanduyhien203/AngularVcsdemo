@@ -18,10 +18,12 @@ import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import { ArticleModule } from './article/article.module';
 
 @NgModule({
   imports: [
     BrowserModule,
+//    ArticleModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -32,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatTableModule,
+  
   ],
 
   declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent,AccountComponent],
