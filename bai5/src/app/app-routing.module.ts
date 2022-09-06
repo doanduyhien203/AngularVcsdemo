@@ -31,13 +31,13 @@ const routes: Routes = [
     path: "",
     redirectTo: 'sign-in-rf',
     pathMatch: "full"
-  },
-  
+  }, 
   {
     path: 'article',
     loadChildren: () =>
       import('./article/article.module').then((m) => m.ArticleModule),
   },
+
 ];
 @NgModule({
   imports: [

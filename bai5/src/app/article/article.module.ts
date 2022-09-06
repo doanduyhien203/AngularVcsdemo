@@ -8,11 +8,11 @@ import { ArticleComponent } from './article.component';
 const routes: Routes = [
   
       {
-        path: '',
+        path: 'article',
         component: ArticleListComponent,
       },
       {
-        path: ':slug',
+        path: 'article/:slug',
         component: ArticleDetailComponent,
       },
     ];
