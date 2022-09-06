@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
+
+
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
@@ -27,6 +29,7 @@ const routes: Routes = [
     path: 'account',
     component: AccountComponent,
   },
+
   {
     path: "",
     redirectTo: 'sign-in-rf',

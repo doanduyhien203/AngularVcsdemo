@@ -16,20 +16,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableModule} from '@angular/material/table';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './account/sortable.directive';
-import { CommonModule } from '@angular/common';
-
+import { CommonModule, DecimalPipe } from '@angular/common';
+import {MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ArticleModule } from './article/article.module';
+
 
 @NgModule({
   imports: [
     BrowserModule,
-//    ArticleModule,
-    AppRoutingModule,
+    CommonModule,
+ //       ArticleModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -40,12 +41,22 @@ import { ArticleModule } from './article/article.module';
     MatPaginatorModule,
     MatTableModule,
     NgbModule,
-    ReactiveFormsModule,
-    CommonModule,
+    AppRoutingModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
 
-  declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent,AccountComponent, NgbdSortableHeader],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SignInComponent,
+    SignInRfComponent,
+    RegisterComponent,
+    AccountComponent,
+    NgbdSortableHeader,
+//    CourseComponent,
+  ],
   bootstrap: [AppComponent],
-  
+  providers: [DecimalPipe],
 })
 export class AppModule {}

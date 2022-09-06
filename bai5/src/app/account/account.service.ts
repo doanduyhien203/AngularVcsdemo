@@ -50,7 +50,7 @@ export class AccountService {
   private _total$ = new BehaviorSubject<number>(0);
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 75,
     searchTerm: '',
     sortColumn: '',
     sortDirection: '',
