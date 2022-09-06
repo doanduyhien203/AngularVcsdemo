@@ -18,10 +18,13 @@ import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdSortableHeader } from './account/sortable.directive';
+import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -32,9 +35,13 @@ import {MatTableModule} from '@angular/material/table';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatTableModule,
+    NgbModule,
+    ReactiveFormsModule,
+
   ],
 
-  declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent,AccountComponent],
+  declarations: [AppComponent, HomeComponent, SignInComponent, SignInRfComponent, RegisterComponent,AccountComponent, NgbdSortableHeader],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
