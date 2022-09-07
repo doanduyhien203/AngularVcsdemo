@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignInComponent } from './sign-in/sign-in.component';
+
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,7 +23,6 @@ import { NgbdSortableHeader } from './account/sortable.directive';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { ArticleModule } from './article/article.module';
 import { AlertComponent } from './alert/alert.component';
 
 
@@ -42,21 +41,19 @@ import { AlertComponent } from './alert/alert.component';
     MatPaginatorModule,
     MatTableModule,
     NgbModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
     AppRoutingModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
 
   declarations: [
     AppComponent,
     HomeComponent,
-    SignInComponent,
     SignInRfComponent,
     RegisterComponent,
     AccountComponent,
     NgbdSortableHeader,
     AlertComponent,
-    
 
   ],
   bootstrap: [AppComponent],

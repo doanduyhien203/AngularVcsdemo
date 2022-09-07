@@ -7,11 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { map, Observable, Subject, timer, tap, take, startWith } from 'rxjs';
-import { ApiService } from './api.service';
+import { ApiService } from '../_service/api.service';
 import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../service/alert.service';
-import { UserLoginService } from '../service/userlogin.service';
+import { AlertService } from '../_service/alert.service';
+import { UserLoginService } from '../_service/userlogin.service';
 
 const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{6,32}$/;
 const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{6,32}$/;
