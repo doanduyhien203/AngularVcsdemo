@@ -1,7 +1,9 @@
 table {
     width: 100%;
   }
-  
+  button {
+    margin: 16px 8px;
+  }
   .mat-form-field {
     font-size: 14px;
     width: 100%;
@@ -12,10 +14,6 @@ table {
   }
   .mat-row .mat-cell {
     cursor: pointer;
+    pointer-events: stroke;
   }
   
- 
-  
-  .demo-row-is-clicked {
-    font-weight: bold;
-  }

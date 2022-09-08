@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { MatMenuModule} from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -41,6 +41,7 @@ import { AlertComponent } from './alert/alert.component';
     MatPaginatorModule,
     MatTableModule,
     NgbModule,
+    MatMenuModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
     MatSortModule
