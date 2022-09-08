@@ -18,5 +18,8 @@ export class SignInRfComponent implements OnInit {
   ngOnInit(): void {}
   onSubmit(): void {
     console.log(this.signInForm);
+    alert({ message: "form submitted" });
   }
 }
+
+

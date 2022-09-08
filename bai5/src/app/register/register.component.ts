@@ -6,9 +6,11 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { map, Observable, Subject, timer, tap, take, startWith } from 'rxjs';
+import { map, Observable, Subject, timer, tap, take, startWith, pipe } from 'rxjs';
 import { ApiService } from './api.service';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, first, switchMap } from 'rxjs/operators';
+import { AlertService } from '../alert/alert.service';
+import { Router } from '@angular/router';
 const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{6,32}$/;
 const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{6,32}$/;
 const validateUsernameFromApi = (api: ApiService) => {
@@ -67,7 +69,8 @@ const validateMatchedControlsValue = (
 })
 export class RegisterComponent implements OnInit {
   formSubmit$ = new Subject<boolean | null>();
-
+  loading = false;
+  submitted = false;
   registerForm = this.fb.group(
     {
       username: [
@@ -109,7 +112,9 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-  constructor(private fb: FormBuilder, private api: ApiService) {}
+
+  constructor(private fb: FormBuilder, private api: ApiService,
+    private alertService: AlertService, private router: Router) {}
 
   ngOnInit(): void {
     this.formSubmit$
@@ -127,7 +132,15 @@ export class RegisterComponent implements OnInit {
           this.submitForm();
         })
       )
-      .subscribe();
+      .subscribe(
+        
+       );
   }
-  submitForm(): void {}
+  submitForm() {
+    notify({ message: "form submitted" }, "success", 2000);
+  }
 }
+function notify(arg0: { message: string; }, arg1: string, arg2: number) {
+  throw new Error('Function not implemented.');
+}
+

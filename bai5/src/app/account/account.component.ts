@@ -1,7 +1,7 @@
 
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from './account';
+import { User } from '../models/account';
 import { AccountService } from './account.service';
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
 import {DecimalPipe} from '@angular/common';

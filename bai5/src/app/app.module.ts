@@ -21,16 +21,17 @@ import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './account/sortable.directive';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import {MatSortModule} from '@angular/material/sort';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ArticleModule } from './article/article.module';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     CommonModule,
- //       ArticleModule,
+    ArticleModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -54,9 +55,9 @@ import { ArticleModule } from './article/article.module';
     RegisterComponent,
     AccountComponent,
     NgbdSortableHeader,
-//    CourseComponent,
+    AlertComponent,
   ],
   bootstrap: [AppComponent],
   providers: [DecimalPipe],
 })
-export class AppModule {}
+export class AppModule { }

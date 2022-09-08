@@ -1,5 +1,5 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
-import {User} from './account';
+import {User} from '../models/account';
 
 export type SortColumn = keyof User | '';
 export type SortDirection = 'asc' | 'desc' | '';

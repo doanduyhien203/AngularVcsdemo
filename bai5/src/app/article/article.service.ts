@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Article } from '../model/article';
+import { Article } from '../models/article';
 import { of, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';

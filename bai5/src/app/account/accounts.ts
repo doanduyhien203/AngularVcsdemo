@@ -1,4 +1,4 @@
-import {User} from './account';
+import {User} from '../models/account';
 
 export const USERS: User[] = [
 {"account_number":1,"balance":39225,"firstname":"Amber","lastname":"Duke","age":32,"gender":"M","address":"880 Holmes Lane","employer":"Pyrami","email":"amberduke@pyrami.com","city":"Brogan","state":"IL"},

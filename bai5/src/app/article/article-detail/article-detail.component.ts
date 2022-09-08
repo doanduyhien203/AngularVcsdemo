@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.service';
 import { map, Observable } from 'rxjs';
-import { Article } from '../../model/article';
+import { Article } from '../../models/article';
 import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-article-detail',
