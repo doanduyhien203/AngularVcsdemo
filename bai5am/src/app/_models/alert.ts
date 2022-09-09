@@ -16,8 +16,4 @@ export enum AlertType {
     Error,
     Info,
     Warning
-<<<<<<< HEAD
-} 
-=======
 }
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10

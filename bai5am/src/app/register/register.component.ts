@@ -6,19 +6,13 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { map, Observable, Subject, timer, tap, take, startWith, pipe } from 'rxjs';
-import { ApiService } from './api.service';
-<<<<<<< HEAD
-import { filter, first, switchMap } from 'rxjs/operators';
-import { AlertService } from '../alert/alert.service';
-import { Router } from '@angular/router';
-=======
+import { map, Observable, Subject, timer, tap, take, startWith } from 'rxjs';
+import { ApiService } from '../_service/api.service';
 import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../service/alert.service';
-import { UserLoginService } from '../service/userlogin.service';
+import { AlertService } from '../_service/alert.service';
+import { UserLoginService } from '../_service/userlogin.service';
 
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10
 const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{6,32}$/;
 const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{6,32}$/;
 
@@ -80,8 +74,7 @@ const validateMatchedControlsValue = (
 })
 export class RegisterComponent implements OnInit {
   formSubmit$ = new Subject<boolean | null>();
-  loading = false;
-  submitted = false;
+
   registerForm = this.fb.group(
     {
       username: [
@@ -123,12 +116,6 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-<<<<<<< HEAD
-
-  constructor(private fb: FormBuilder, private api: ApiService,
-    private alertService: AlertService, private router: Router) {}
-
-=======
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
@@ -139,7 +126,6 @@ export class RegisterComponent implements OnInit {
   
   get f() { return this.registerForm.controls; }
  
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10
   ngOnInit(): void {
     this.formSubmit$
       .pipe(
@@ -158,17 +144,7 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe(
         
-<<<<<<< HEAD
-       );
-  }
-  submitForm() {
-    notify({ message: "form submitted" }, "success", 2000);
-=======
       );
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10
   }
+  submitForm(): void {}
 }
-function notify(arg0: { message: string; }, arg1: string, arg2: number) {
-  throw new Error('Function not implemented.');
-}
-

@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+  }
+  button {
+    margin: 16px 8px;
+  }
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+  .mat-row .mat-cell {
+    cursor: pointer;
+  
+  }
+  ::ng-deep .menu-without-scroll {
+    overflow: hidden !important;
+}
+  

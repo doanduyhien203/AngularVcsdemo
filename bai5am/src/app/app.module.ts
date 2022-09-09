@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignInComponent } from './sign-in/sign-in.component';
 
+import { MatMenuModule} from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -21,9 +21,8 @@ import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './account/sortable.directive';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { MatSortModule } from '@angular/material/sort';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ArticleModule } from './article/article.module';
+import {MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlertComponent } from './alert/alert.component';
 
 
@@ -31,7 +30,7 @@ import { AlertComponent } from './alert/alert.component';
   imports: [
     BrowserModule,
     CommonModule,
-    ArticleModule,
+ //       ArticleModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -42,27 +41,23 @@ import { AlertComponent } from './alert/alert.component';
     MatPaginatorModule,
     MatTableModule,
     NgbModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
+    MatMenuModule,
     AppRoutingModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
 
   declarations: [
     AppComponent,
     HomeComponent,
-    SignInComponent,
     SignInRfComponent,
     RegisterComponent,
     AccountComponent,
     NgbdSortableHeader,
     AlertComponent,
-<<<<<<< HEAD
-=======
-    
 
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10
   ],
   bootstrap: [AppComponent],
   providers: [DecimalPipe],
 })
-export class AppModule { }
+export class AppModule {}

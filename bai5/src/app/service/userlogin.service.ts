@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {User} from '../models/userlogin';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
+import { User } from '../models/userlogin';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService {
+export class UserLoginService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
