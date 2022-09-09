@@ -24,7 +24,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlertComponent } from './alert/alert.component';
-
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 @NgModule({
   imports: [
@@ -44,7 +44,8 @@ import { AlertComponent } from './alert/alert.component';
     MatMenuModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+
   ],
 
   declarations: [
@@ -55,6 +56,8 @@ import { AlertComponent } from './alert/alert.component';
     AccountComponent,
     NgbdSortableHeader,
     AlertComponent,
+    EditAccountComponent
+
 
   ],
   bootstrap: [AppComponent],

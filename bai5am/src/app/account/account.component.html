@@ -116,11 +116,13 @@
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let element" type="button">
+      <td mat-cell *matCellDef="let element; index as idx" type="button">
         <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-        <mat-menu #menu="matMenu" >
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="removeAt(idx)">Item 1</button>
+          <button mat-menu-item (click)="openDialog()">
+            Item 2
+          </button>
         </mat-menu>
       </td>
     </ng-container>

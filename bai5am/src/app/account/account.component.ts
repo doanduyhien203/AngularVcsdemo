@@ -9,8 +9,12 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { USERS } from './accounts';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
+
 import { SelectionModel } from '@angular/cdk/collections';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { Dialog } from '@angular/cdk/dialog';
+import { EditAccountComponent } from '../edit-account/edit-account.component';
+
 
 
 
@@ -28,12 +32,24 @@ export class AccountComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator; 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<User>;
+ 
   clickedRows = new Set<User>();
   selection = new SelectionModel<User>(true, []);
-constructor() {
-  console.log(this.data);
+constructor( private dialog: MatDialog){
+  
   }
+  openDialog() {
+    console.log('Row clicked');
+    const dialog = this.dialog.open(EditAccountComponent, {
+      width: '250px',
+      // Can be closed only by clicking the close button
+      disableClose: true,
+    });
+  }
+
  
+
+
   
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -66,15 +82,25 @@ constructor() {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
   /** The label for the checkbox on the passed row */
-  
+  removeAt(index: number) {
+    const deleteItem = confirm("Are you sure you want to delete ?" );
+    if (deleteItem) {
+      const data = this.dataSource.data;
+      data.splice(
+        this.paginator.pageIndex * this.paginator.pageSize + index,
+        1
+      );
+      this.dataSource.data = data;
+    }
+  }
 
   
 
   ngAfterViewInit() {
     
-    setTimeout(() => {
+
       this.dataSource.paginator = this.paginator;
-    });
+
     this.dataSource.sort = this.sort;
   }
   
@@ -96,10 +122,11 @@ constructor() {
       this.columnsToDisplay.pop();
     }
   }
- 
+  
+/** Builds and returns a new User. */
+
 }
 
-/** Builds and returns a new User. */
 
 
 
