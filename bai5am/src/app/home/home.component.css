@@ -1,0 +1,16 @@
+
+  
+  .example-sidenav-content {
+   
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 50px;
+  }
+.log-out{
+    position: absolute;
+    right: 15px;
+}

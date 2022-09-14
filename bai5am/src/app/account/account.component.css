@@ -1,22 +1,172 @@
 table {
-    width: 100%;
-  }
-  button {
-    margin: 16px 8px;
-  }
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-  .mat-row .mat-cell {
-    cursor: pointer;
-  
-  }
-  ::ng-deep .menu-without-scroll {
-    overflow: hidden !important;
+  width: 100%;
 }
+table{
+  width: 100%;
+ }
   
+ .mat-column-select {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 8% !important;
+  width: 8% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+ .mat-column-account_number {
+   word-wrap: break-word !important;
+   white-space: unset !important;
+   flex: 0 0 8% !important;
+   width: 8% !important;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+ 
+   word-break: break-word;
+ 
+   -ms-hyphens: auto;
+   -moz-hyphens: auto;
+   -webkit-hyphens: auto;
+   hyphens: auto;
+ }
+ 
+ .mat-column-balance {
+   word-wrap: break-word !important;
+   white-space: unset !important;
+   flex: 0 0 10% !important;
+   width: 10% !important;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+ 
+   word-break: break-word;
+ 
+   -ms-hyphens: auto;
+   -moz-hyphens: auto;
+   -webkit-hyphens: auto;
+   hyphens: auto;
+ }
+ 
+ .mat-column-firstname {
+   word-wrap: break-word !important;
+   white-space: unset !important;
+   flex: 0 0 17% !important;
+   width: 17% !important;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+ 
+   word-break: break-word;
+ 
+   -ms-hyphens: auto;
+   -moz-hyphens: auto;
+   -webkit-hyphens: auto;
+   hyphens: auto;
+ }
+ 
+ .mat-column-email {
+   word-wrap: break-word !important;
+   white-space: unset !important;
+   flex: 0 0 20% !important;
+   width: 20% !important;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+ 
+   word-break: break-word;
+ 
+   -ms-hyphens: auto;
+   -moz-hyphens: auto;
+   -webkit-hyphens: auto;
+   hyphens: auto;
+ }
+ 
+ .mat-column-gender {
+   word-wrap: break-word !important;
+   white-space: unset !important;
+   flex: 0 0 5% !important;
+   width: 5% !important;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+ 
+   word-break: break-word;
+ 
+   -ms-hyphens: auto;
+   -moz-hyphens: auto;
+   -webkit-hyphens: auto;
+   hyphens: auto;
+ }
+ .mat-column-age {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-address {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-action {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+button {
+  margin: 16px 8px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,th {
+  width: 25%;
+}
+
+.mat-row .mat-cell {
+  cursor: pointer;
+
+}
+.removeBtn{
+  position: absolute;
+  right: 5px;
+}
+.filter{
+
+left:35px;
+width: 30%;
+}

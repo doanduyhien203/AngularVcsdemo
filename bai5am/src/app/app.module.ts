@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatMenuModule} from '@angular/material/menu';
@@ -15,22 +14,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
 import { RegisterComponent } from './register/register.component';
-import { AccountComponent } from './account/account.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdSortableHeader } from './account/sortable.directive';
+
 import { CommonModule, DecimalPipe } from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlertComponent } from './alert/alert.component';
+import { HighlightSearchPipe } from './account/highlightable-search.pipe';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import { HomeComponent } from './home/home.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     CommonModule,
- //       ArticleModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -40,27 +42,26 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatTableModule,
-    NgbModule,
     MatMenuModule,
-    AppRoutingModule,
-    MatProgressSpinnerModule,
+    MatToolbarModule,
     MatSortModule,
-
+    MatGridListModule,
+    MatIconModule,
+    MatSidenavModule,
+    AppRoutingModule,
+    
   ],
 
   declarations: [
     AppComponent,
-    HomeComponent,
     SignInRfComponent,
     RegisterComponent,
+    HomeComponent,
     AccountComponent,
-    NgbdSortableHeader,
     AlertComponent,
-    EditAccountComponent
-
-
+    HighlightSearchPipe,
   ],
   bootstrap: [AppComponent],
-  providers: [DecimalPipe],
+
 })
 export class AppModule {}

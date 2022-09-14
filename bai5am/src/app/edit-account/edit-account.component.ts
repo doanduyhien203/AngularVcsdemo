@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { AlertService } from '../_service/alert.service';
 
 @Component({
   selector: 'app-edit-account',
   templateUrl: './edit-account.component.html',
   styleUrls: ['./edit-account.component.css']
 })
+
+@Injectable({
+  providedIn: 'root'
+})
 export class EditAccountComponent implements OnInit {
 
-  
   constructor(
-    public dialogRef: MatDialogRef<EditAccountComponent>,
-   
-  ) { }
+
+    private alertService: AlertService) { }
+
 
 
   ngOnInit() {
-    console.log('Dialog got');
+
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
+
 }
