@@ -21,13 +21,17 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
 import { AlertComponent } from './alert/alert.component';
 import { HighlightSearchPipe } from './account/highlightable-search.pipe';
-import { EditAccountComponent } from './edit-account/edit-account.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account.component';
+import { AccountComponent} from './account/account.component';
+import { LoginComponent } from './login/login.component';
+import { RegisUserComponent } from './regis-user/regis-user.component';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { DialogModule } from '@angular/cdk/dialog';
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 @NgModule({
   imports: [
@@ -47,8 +51,10 @@ import { AccountComponent } from './account/account.component';
     MatSortModule,
     MatGridListModule,
     MatIconModule,
+    MatDialogModule,
     MatSidenavModule,
     AppRoutingModule,
+
     
   ],
 
@@ -60,8 +66,14 @@ import { AccountComponent } from './account/account.component';
     AccountComponent,
     AlertComponent,
     HighlightSearchPipe,
+    LoginComponent,
+    RegisUserComponent,
+    EditAccountComponent
   ],
   bootstrap: [AppComponent],
-
+  providers: [
+ 
+  ],
+  
 })
 export class AppModule {}

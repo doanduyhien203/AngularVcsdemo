@@ -1,12 +1,14 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { User } from '../_models/account';
 import { MatTableDataSource } from '@angular/material/table';
 import { USERS } from './accounts';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatMenuTrigger} from '@angular/material/menu';
+import {MatDialog} from '@angular/material/dialog';
+
+import { MatMenuTrigger } from '@angular/material/menu';
+import { EditAccountComponent } from '../edit-account/edit-account.component';
 
 @Component({
   selector: 'account-table',
@@ -33,17 +35,27 @@ export class AccountComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
   constructor(
-    // private dialog: MatDialog,
+    public dialog: MatDialog,
     ) {
     
-    // console.log(this.data);
+      console.log(this.data);
    }
+   openDialog() {
+    const dialogRef = this.dialog.open(EditAccountComponent, {restoreFocus: false});
+
+    // Manually restore focus to the menu trigger since the element that
+    // opens the dialog won't be in the DOM any more when the dialog closes.
+    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   } 
 
   
+
+
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -52,6 +64,8 @@ export class AccountComponent implements AfterViewInit {
   }
 
   removeSelectedRows() {
+    const deleteItems = confirm('Are you sure you want to delete ?');
+    if (deleteItems){
     this.selection.selected.forEach((item) => {
       let index: number = this.data.findIndex((d) => d === item);
       console.log(this.data.findIndex((d) => d === item));
@@ -61,7 +75,7 @@ export class AccountComponent implements AfterViewInit {
       this.dataSource.sort = this.sort;
     });
     this.selection = new SelectionModel<User>(true, []);
-  }
+  }}
 
   masterToggle() {
     this.isAllSelected()
@@ -112,7 +126,7 @@ export class AccountComponent implements AfterViewInit {
  
   
 }
-  
+
   
 
 

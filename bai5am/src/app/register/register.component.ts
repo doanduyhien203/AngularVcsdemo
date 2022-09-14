@@ -75,6 +75,8 @@ const validateMatchedControlsValue = (
 export class RegisterComponent implements OnInit {
   formSubmit$ = new Subject<boolean | null>();
 
+  showPassword: boolean = false;
+
   registerForm = this.fb.group(
     {
       username: [
@@ -116,16 +118,12 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-  constructor(
-    private fb: FormBuilder,
-    private api: ApiService,
-    
-  ) {
-   
+  constructor(private fb: FormBuilder, private api: ApiService) {}
+
+  get f() {
+    return this.registerForm.controls;
   }
-  
-  get f() { return this.registerForm.controls; }
- 
+
   ngOnInit(): void {
     this.formSubmit$
       .pipe(
@@ -139,12 +137,10 @@ export class RegisterComponent implements OnInit {
         ),
         filter((status) => status === 'VALID'),
         tap(() => {
-          this.submitForm() ;
+          this.submitForm();
         })
       )
-      .subscribe(
-        
-      );
+      .subscribe();
   }
   submitForm(): void {}
 }
