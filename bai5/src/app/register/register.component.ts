@@ -123,12 +123,10 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-<<<<<<< HEAD
 
-  constructor(private fb: FormBuilder, private api: ApiService,
-    private alertService: AlertService, private router: Router) {}
 
-=======
+
+
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
@@ -139,7 +137,7 @@ export class RegisterComponent implements OnInit {
   
   get f() { return this.registerForm.controls; }
  
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10
+
   ngOnInit(): void {
     this.formSubmit$
       .pipe(
@@ -157,15 +155,14 @@ export class RegisterComponent implements OnInit {
         })
       )
       .subscribe(
-        
-<<<<<<< HEAD
+
        );
   }
   submitForm() {
     notify({ message: "form submitted" }, "success", 2000);
-=======
+
       );
->>>>>>> e2b11c094ebd2a728f1278d2b04c056030571b10
+
   }
 }
 function notify(arg0: { message: string; }, arg1: string, arg2: number) {

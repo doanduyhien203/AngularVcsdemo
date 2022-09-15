@@ -1,33 +1,31 @@
-
-<p>
-  <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
-
-    <button mat-icon-button class="log-out" routerLink="../sign-in-rf" ><mat-icon>logout</mat-icon></button>
-
+<p class="container-page">
+  <mat-toolbar>
+    <div class="tool-side">
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+        (click)="drawer.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="side-title">My App</span>
+      <div style="margin-left: 150px">
+        <h1>Account List</h1>
+      </div>
+      <button mat-icon-button class="log-out" routerLink="../sign-in-rf"
+      color="black">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
 </p>
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container">
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-   
-   
+    <span>Auto-resizing sidenav</span>
   </mat-drawer>
 
   <div class="example-sidenav-content">
-  
     <router-outlet></router-outlet>
   </div>
-
 </mat-drawer-container>
-

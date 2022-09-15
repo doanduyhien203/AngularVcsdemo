@@ -1,15 +1,49 @@
 table {
   width: 100%;
+
+
+
 }
-table{
-  width: 100%;
- }
-  
- .mat-column-select {
+.mat-elevation-z8{
+  margin-top: 50px;
+  width: 1500px;
+
+}
+.mat-header-cell {
+  text-transform: uppercase;
+}
+.mat-column-select {
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 8% !important;
   width: 8% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-account_number {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 8% !important;
+  width: 8% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-balance {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 10% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -20,85 +54,55 @@ table{
   -webkit-hyphens: auto;
   hyphens: auto;
 }
- .mat-column-account_number {
-   word-wrap: break-word !important;
-   white-space: unset !important;
-   flex: 0 0 8% !important;
-   width: 8% !important;
-   overflow-wrap: break-word;
-   word-wrap: break-word;
-   word-break: break-word;
- 
-   -ms-hyphens: auto;
-   -moz-hyphens: auto;
-   -webkit-hyphens: auto;
-   hyphens: auto;
- }
- 
- .mat-column-balance {
-   word-wrap: break-word !important;
-   white-space: unset !important;
-   flex: 0 0 10% !important;
-   width: 10% !important;
-   overflow-wrap: break-word;
-   word-wrap: break-word;
- 
-   word-break: break-word;
- 
-   -ms-hyphens: auto;
-   -moz-hyphens: auto;
-   -webkit-hyphens: auto;
-   hyphens: auto;
- }
- 
- .mat-column-firstname {
-   word-wrap: break-word !important;
-   white-space: unset !important;
-   flex: 0 0 17% !important;
-   width: 17% !important;
-   overflow-wrap: break-word;
-   word-wrap: break-word;
- 
-   word-break: break-word;
- 
-   -ms-hyphens: auto;
-   -moz-hyphens: auto;
-   -webkit-hyphens: auto;
-   hyphens: auto;
- }
- 
- .mat-column-email {
-   word-wrap: break-word !important;
-   white-space: unset !important;
-   flex: 0 0 20% !important;
-   width: 20% !important;
-   overflow-wrap: break-word;
-   word-wrap: break-word;
- 
-   word-break: break-word;
- 
-   -ms-hyphens: auto;
-   -moz-hyphens: auto;
-   -webkit-hyphens: auto;
-   hyphens: auto;
- }
- 
- .mat-column-gender {
-   word-wrap: break-word !important;
-   white-space: unset !important;
-   flex: 0 0 5% !important;
-   width: 5% !important;
-   overflow-wrap: break-word;
-   word-wrap: break-word;
- 
-   word-break: break-word;
- 
-   -ms-hyphens: auto;
-   -moz-hyphens: auto;
-   -webkit-hyphens: auto;
-   hyphens: auto;
- }
- .mat-column-age {
+
+.mat-column-firstname {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 17% !important;
+  width: 17% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-email {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 20% !important;
+  width: 20% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-gender {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-age {
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 5% !important;
@@ -148,24 +152,31 @@ button {
 }
 
 .mat-form-field {
-  font-size: 14px;
+  font-size: 15px;
   width: 100%;
 }
 
-td,th {
+td,
+th {
+  font-weight: 500;
+  color: #7e8299;
   width: 25%;
 }
 
 .mat-row .mat-cell {
   cursor: pointer;
-
 }
-.removeBtn{
-  position: absolute;
-  right: 5px;
-}
-.filter{
 
-left:35px;
-width: 30%;
+.filter {
+  left: 40px;
+  width: 25%;
+}
+::ng-deep .mat-menu {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90px;
+  height: 90px !important;
+  overflow: hidden !important;
 }
