@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { User } from '../_models/account';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { USERS } from './accounts';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SelectionModel } from '@angular/cdk/collections';
+import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import {MatDialog} from '@angular/material/dialog';
 
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -16,7 +16,7 @@ import { EditAccountComponent } from '../edit-account/edit-account.component';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements AfterViewInit {
-  displayedColumns = [
+  displayedColumns: string[]= [
     'select',
     'account_number',
     'balance',
@@ -34,20 +34,44 @@ export class AccountComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
+  @ViewChild(MatTable) table: MatTable<User>;
   constructor(
     public dialog: MatDialog,
     ) {
     
       console.log(this.data);
    }
-   openDialog() {
-    const dialogRef = this.dialog.open(EditAccountComponent, {restoreFocus: false});
-
-    // Manually restore focus to the menu trigger since the element that
-    // opens the dialog won't be in the DOM any more when the dialog closes.
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+   /*
+   addData() {
+    const randomElementIndex = Math.floor(Math.random() * this.data.length);
+    this.dataSource.data.push();
+    this.table.renderRows();
   }
 
+  removeData() {
+    this.dataSource.data.pop();
+    this.table.renderRows();
+  }
+  */
+  newRecord = '';
+  newObject = {
+    firstName: '',
+    lastName: ''
+  };
+  data1: any[] = [];
+  names: any[] = [];
+  addDqta() {
+    this.data1.push(this.newRecord);
+    this.newRecord = '';
+    if(this.newObject.firstName && this.newObject.lastName) {
+      this.names.push(this.newObject);
+    }
+    this.newObject = {
+      firstName: '',
+      lastName: ''
+    };
+  }
+  
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -124,7 +148,18 @@ export class AccountComponent implements AfterViewInit {
     }
   }
  
-  
+  openDialog() {
+    const data = this.dataSource.data;
+    const dialog = this.dialog.open(EditAccountComponent, {
+      width: '250px',
+      // Can be closed only by clicking the close button
+      disableClose: true,
+     
+    }
+    
+    );
+   
+  } 
 }
 
   
