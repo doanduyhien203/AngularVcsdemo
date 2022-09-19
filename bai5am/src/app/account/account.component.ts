@@ -139,14 +139,16 @@ export class AccountComponent implements AfterViewInit {
   }
   openDialog(index: number) {
     const data2 = this.dataSource.data.slice(index,index+1);
-    console.log('Row clicked', data2.slice(0));
+    for (let i = 0; i < data2.length; i++) {
+      console.log(data2[i]);
+  }
     
 
     const dialog = this.dialog.open(EditAccountComponent, {
       width: '250px',
       // Can be closed only by clicking the close button
       disableClose: true,
-      data: data2.slice(0),
+      data2: data2,
     });
   }
 }

@@ -13,12 +13,12 @@ export class EditAccountComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditAccountComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data2: any,
   ) { }
 
 
   ngOnInit() {
-    console.log('Dialog got', this.data);
+    console.log('Dialog got', this.data2);
   }
   
   closeDialog() {
