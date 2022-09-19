@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 
 
-export class EditAccountComponent {
+export class EditAccountComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditAccountComponent>,
@@ -20,7 +20,10 @@ export class EditAccountComponent {
   ngOnInit() {
     console.log('Dialog got', this.data);
   }
-
+  
+  closeDialog() {
+    this.dialogRef.close();
+  }
  
 }
   

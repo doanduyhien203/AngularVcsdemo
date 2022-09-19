@@ -6,11 +6,11 @@
     </mat-form-field>
     
     <mat-form-field>
-      <input matInput placeholder="Weight" [(ngModel)]="data.weight">
+      <input matInput placeholder="Weight" [(ngModel)]="data.balance">
     </mat-form-field>
     
     <mat-form-field>
-      <input matInput placeholder="Symbol" [(ngModel)]="data.symbol">
+      <input matInput placeholder="Symbol" [(ngModel)]="data.age">
     </mat-form-field>
     
     
@@ -21,6 +21,6 @@
   
 
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Okay</button>
+    <button mat-button (click)="closeDialog()">Close</button>
   </div>
   
