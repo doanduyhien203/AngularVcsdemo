@@ -13,7 +13,8 @@
 .example-sidenav {
   color: #B6B9C8;
   padding: 20px;
-  height: 100%;
+
+  
 }
 .example-sidenav:hover span{
   color: #FFFFFF;
