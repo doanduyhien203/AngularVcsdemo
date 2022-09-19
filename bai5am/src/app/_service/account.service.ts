@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 import { DatePipe } from '@angular/common';
+import { USERS } from '../account/accounts';
+import { User } from '../_models/account';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +52,9 @@ export class AccountService {
       
     });
   }
-
+  getAccount() {
+    return USERS;
+  }
   updateAccount(account) {
     this.accountList.update(account.$key,
       {
@@ -65,5 +69,7 @@ export class AccountService {
       gender: account.gender,
       });
   }
-
+  addAccount(formData: User){
+    USERS.push(formData);
+  }
 }

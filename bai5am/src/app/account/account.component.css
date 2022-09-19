@@ -1,11 +1,13 @@
 table {
   width: 100%;
-
+ 
 }
+
 .mat-elevation-z8{
-  
-  margin-top: 50px;
-  width: 1500px;
+  flex-direction: column ;
+  min-width:1350px;
+  margin-top: 40px;
+  width: 100%;
 
 }
 .mat-header-cell {

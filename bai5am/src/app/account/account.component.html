@@ -10,18 +10,19 @@
       #input
     />
   </mat-form-field>
-  <button mat-raised-button  class="demo-button">
+  <button mat-raised-button style="float: right; margin-right: 30px;" (click)="addData()">
     Add data
   </button>
   <button
   
-    style="margin-left:900px;"
+    style="float: right;margin-right: 10px;"
     mat-raised-button
     color="primary"
     (click)="removeSelectedRows()"
   >
     Remove Selected Rows
   </button>
+  
   <table mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>

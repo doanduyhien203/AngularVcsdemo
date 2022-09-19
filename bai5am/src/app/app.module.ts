@@ -17,7 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
 import { AlertComponent } from './alert/alert.component';
 import { HighlightSearchPipe } from './account/highlightable-search.pipe';
@@ -26,7 +26,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
-import { AccountComponent} from './account/account.component';
+import { AccountComponent, DataDialog} from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisUserComponent } from './regis-user/regis-user.component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -51,6 +51,9 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     MatSortModule,
     MatGridListModule,
     MatIconModule,
+   
+
+    DialogModule,
     MatDialogModule,
     MatSidenavModule,
     AppRoutingModule,
@@ -68,12 +71,18 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     HighlightSearchPipe,
     LoginComponent,
     RegisUserComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    DataDialog,
   ],
   bootstrap: [AppComponent],
   providers: [
- 
-  ],
+    DatePipe,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    
+ ],
   
 })
 export class AppModule {}
