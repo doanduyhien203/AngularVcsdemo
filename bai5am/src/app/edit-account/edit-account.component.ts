@@ -1,24 +1,29 @@
-import { Component } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
-@Component({
+@Component({ 
   selector: 'app-edit-account',
-  templateUrl: '../edit-account/edit-account.component.html',
+  templateUrl: './edit-account.component.html',
 
 })
 
 
-export class EditAccountComponent {
-  signInForm = this.fb.group({
-    username: '',
-    password: '',
-    rememberMe: false,
-  });
-  constructor(private fb: FormBuilder) {}
+export class EditAccountComponent implements OnInit {
 
-  ngOnInit(): void {}
-  onSubmit(): void {
-    console.log(this.signInForm);
+  constructor(
+    public dialogRef: MatDialogRef<EditAccountComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) { }
+
+
+  ngOnInit() {
+    console.log('Dialog got', this.data);
   }
+  
+  closeDialog() {
+    this.dialogRef.close();
+  }
+ 
 }
   

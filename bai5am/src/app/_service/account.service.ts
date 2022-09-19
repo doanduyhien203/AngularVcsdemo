@@ -19,7 +19,6 @@ export class AccountService {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
-    
     address: new FormControl(''),
     gender: new FormControl(''),
 
@@ -45,10 +44,8 @@ export class AccountService {
     balance:account.balance,
       firstName: account.firstname,
       lastName: account.lastname,
-      
       email: account.email,
-    
-      address: account.address,
+      ddress: account.address,
       gender: account.gender,
       
     });
