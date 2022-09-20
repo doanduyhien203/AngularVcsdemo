@@ -26,7 +26,7 @@
 }
 
 .mat-drawer {
-  width: 240px;
+  width: 250px;
   height: 100%;
   background-color: #1E1E2D;
 
@@ -46,7 +46,7 @@
   color: #5E6278;
   display: flex;
   padding: 15px;
-  width: 240px;
+  width: 250px;
   height: 100%;
   background-color: #181C32;
   border-bottom: 1px solid rgb(42, 40, 80);

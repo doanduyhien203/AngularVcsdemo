@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -17,21 +17,24 @@ import { RegisterComponent } from './register/register.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 
-import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
-import {MatSortModule} from '@angular/material/sort';
+import { CommonModule, DatePipe } from '@angular/common';
+import { MatSortModule } from '@angular/material/sort';
 import { AlertComponent } from './alert/alert.component';
 import { HighlightSearchPipe } from './account/highlightable-search.pipe';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
-import { AccountComponent, DataDialog} from './account/account.component';
+import {
+  AccountComponent,
+  DataDialog,
+  EditDialog,
+} from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisUserComponent } from './regis-user/regis-user.component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
-import { EditAccountComponent } from './edit-account/edit-account.component';
 
 @NgModule({
   imports: [
@@ -51,14 +54,11 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     MatSortModule,
     MatGridListModule,
     MatIconModule,
-   
-
+    MatFormFieldModule,
     DialogModule,
     MatDialogModule,
     MatSidenavModule,
     AppRoutingModule,
-
-    
   ],
 
   declarations: [
@@ -71,18 +71,16 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     HighlightSearchPipe,
     LoginComponent,
     RegisUserComponent,
-    EditAccountComponent,
     DataDialog,
+    EditDialog,
   ],
   bootstrap: [AppComponent],
   providers: [
     DatePipe,
     {
       provide: MatDialogRef,
-      useValue: {}
+      useValue: {},
     },
-    
- ],
-  
+  ],
 })
 export class AppModule {}

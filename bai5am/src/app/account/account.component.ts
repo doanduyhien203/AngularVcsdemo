@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { EditAccountComponent } from '../edit-account/edit-account.component';
+
 import { AccountService } from '../_service/account.service';
 
 @Component({
@@ -128,16 +128,7 @@ export class AccountComponent implements AfterViewInit {
       
     }
   }
-<<<<<<< HEAD
-  openDialog(index: number) {
-    const data2 = this.dataSource.data.slice(index,index+1);
-    for (let i = 0; i < data2.length; i++) {
-      console.log(data2[i]);
-  }
-    
-=======
->>>>>>> f836ac8791a2c79b13f6028288c9e316eacf4ac3
-
+/*
   openDialog(index: number) {
     const data = this.dataSource.data.slice(index,index+1);
     for( let i=0;i<data.length;i++){
@@ -148,14 +139,21 @@ export class AccountComponent implements AfterViewInit {
       width: '250px',
       // Can be closed only by clicking the close button
       disableClose: true,
-<<<<<<< HEAD
-      data2: data2,
-=======
       data: data,
->>>>>>> f836ac8791a2c79b13f6028288c9e316eacf4ac3
     });
   }
+  */
+  user;
+  editUser(user) {
+    const dialogRef = this.dialog.open(EditDialog, {
+      width: '250px',
+      data: user
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.user = user;
+    });
+  }
 
 }
 
@@ -185,4 +183,18 @@ export class DataDialog implements OnInit {
   }
 }
 
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog.html',
+})
+export class EditDialog {
 
+  constructor(
+    public dialogRef: MatDialogRef<EditDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: User) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}

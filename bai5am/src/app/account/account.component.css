@@ -1,14 +1,11 @@
 table {
   width: 100%;
- 
 }
 
-.mat-elevation-z8{
-  flex-direction: column ;
-  min-width:1350px;
+.mat-elevation-z8 {
+  flex-direction: column;
+  min-width: 1200px;
   margin-top: 40px;
-  width: 100%;
-
 }
 .mat-header-cell {
   text-transform: uppercase;
@@ -91,8 +88,8 @@ table {
 .mat-column-gender {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 5% !important;
-  width: 5% !important;
+  flex: 0 0 8% !important;
+  width: 8% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
