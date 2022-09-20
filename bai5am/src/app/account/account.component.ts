@@ -1,11 +1,22 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { User } from '../_models/account';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { USERS } from './accounts';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 import { AccountService } from '../_service/account.service';
@@ -35,38 +46,26 @@ export class AccountComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
   @ViewChild(MatTable) table: MatTable<User>;
-  
-  constructor(public dialog: MatDialog,
-    private datadialogRef: MatDialogRef<DataDialog>) {}
-  /*
-   addData() {
-    const randomElementIndex = Math.floor(Math.random() * this.data.length);
-    this.dataSource.data.push();
-    this.table.renderRows();
-  }
 
-  removeData() {
-    this.dataSource.data.pop();
-    this.table.renderRows();
-  }
-  */
-  
+  constructor(
+    public dialog: MatDialog,
+    private datadialogRef: MatDialogRef<DataDialog>
+  ) {}
+
   addData() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '60%';
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     const dataRef = this.dialog.open(DataDialog, dialogConfig);
-    dataRef.afterClosed().subscribe(result => {
+    dataRef.afterClosed().subscribe((result) => {
       this.dataSource.paginator = this.paginator;
-    
-    })
+    });
   }
 
-    onNoClick(): void {
-      this.datadialogRef.close();
-    }
-  
+  onNoClick(): void {
+    this.datadialogRef.close();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -115,7 +114,6 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  
   removeAt(index: number) {
     const deleteItem = confirm('Are you sure you want to delete ?');
     if (deleteItem) {
@@ -125,36 +123,20 @@ export class AccountComponent implements AfterViewInit {
         1
       );
       this.dataSource.data = data;
-      
     }
   }
-/*
-  openDialog(index: number) {
-    const data = this.dataSource.data.slice(index,index+1);
-    for( let i=0;i<data.length;i++){
-      console.log(data[i])
-    }
-    console.log(data)
-    const dialog = this.dialog.open(EditAccountComponent, {
-      width: '250px',
-      // Can be closed only by clicking the close button
-      disableClose: true,
-      data: data,
-    });
-  }
-  */
+
   user;
   editUser(user) {
     const dialogRef = this.dialog.open(EditDialog, {
       width: '250px',
-      data: user
+      data: user,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.user = user;
     });
   }
-
 }
 
 @Component({
@@ -162,20 +144,19 @@ export class AccountComponent implements AfterViewInit {
   templateUrl: './data-dialog.html',
 })
 export class DataDialog implements OnInit {
-    dataSource = new MatTableDataSource<User>();
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+  dataSource = new MatTableDataSource<User>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     public dialogRef: MatDialogRef<DataDialog>,
     @Inject(MAT_DIALOG_DATA) public data: User,
-    private dataService: AccountService) { }
+    private dataService: AccountService
+  ) {}
 
   onYesClick(): void {
     this.dialogRef.close(false);
   }
-  ngOnInit() {
-   
-  }
-  onSubmit(formData){
+  ngOnInit() {}
+  onSubmit(formData) {
     let id = this.dataService.getAccount().length + 1;
     formData.id = id;
     this.dataService.addAccount(formData);
@@ -188,13 +169,12 @@ export class DataDialog implements OnInit {
   templateUrl: './dialog.html',
 })
 export class EditDialog {
-
   constructor(
     public dialogRef: MatDialogRef<EditDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: User) {}
+    @Inject(MAT_DIALOG_DATA) public data: User
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

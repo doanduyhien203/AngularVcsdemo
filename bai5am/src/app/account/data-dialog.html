@@ -1,48 +1,89 @@
-
 <form #form="ngForm" novalidate (ngSubmit)="onSubmit(form.value)">
   <div class="example-container">
     <input type="hidden" ngModel name="id" />
-    
+
     <mat-form-field>
-      <input matInput  name="account_number" required ngModel placeholder="Account_number">
-      
+      <input
+        matInput
+        name="account_number"
+        required
+        ngModel
+        placeholder="Account_number"
+      />
     </mat-form-field>
-    
+
     <mat-form-field>
-      <input matInput #lname name="balance" required ngModel placeholder="Balance">
-      
+      <input
+        matInput
+        #lname
+        name="balance"
+        required
+        ngModel
+        placeholder="Balance"
+      />
     </mat-form-field>
-    
+
     <mat-form-field>
-      <input name="firstname" #fname required ngModel matInput placeholder="Firstname">
-      
+      <input
+        name="firstname"
+        #fname
+        required
+        ngModel
+        matInput
+        placeholder="Firstname"
+      />
     </mat-form-field>
-  
+
     <mat-form-field>
-      <input matInput #lname name="lastname" required ngModel placeholder="Lastname">
-      
+      <input
+        matInput
+        #lname
+        name="lastname"
+        required
+        ngModel
+        placeholder="Lastname"
+      />
     </mat-form-field>
     <mat-form-field>
-      <input matInput #lname name="email" required ngModel placeholder="Email">
-      
+      <input
+        matInput
+        #lname
+        name="email"
+        required
+        ngModel
+        placeholder="Email"
+      />
     </mat-form-field>
     <mat-form-field>
-      <input matInput #lname name="gender" required ngModel placeholder="Gender">
-      
+      <input
+        matInput
+        #lname
+        name="gender"
+        required
+        ngModel
+        placeholder="Gender"
+      />
     </mat-form-field>
     <mat-form-field>
-      <input matInput #lname name="age" required ngModel placeholder="Age">
-      
+      <input matInput #lname name="age" required ngModel placeholder="Age" />
     </mat-form-field>
     <mat-form-field>
-      <input matInput #lname name="address" required ngModel placeholder="Address">
-      
+      <input
+        matInput
+        #lname
+        name="address"
+        required
+        ngModel
+        placeholder="Address"
+      />
     </mat-form-field>
-    
-  <div mat-dialog-actions>
-    <button mat-flat-button  color="primary" [disabled]="!form.valid">Submit</button> &nbsp;
-    <button mat-flat-button color="warn" mat-dialog-close>Close</button>
+
+    <div mat-dialog-actions>
+      <button mat-flat-button color="primary" [disabled]="!form.valid">
+        Submit
+      </button>
+      &nbsp;
+      <button mat-flat-button color="warn" mat-dialog-close>Close</button>
+    </div>
   </div>
-  </div>
-  
-  </form>
+</form>

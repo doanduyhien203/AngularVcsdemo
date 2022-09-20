@@ -1,7 +1,9 @@
 <div class="mat-elevation-z8">
   <mat-form-field appearance="standard" class="filter">
     <mat-label>
-      <mat-icon style="transform: scale(1.25); margin-right: 10px;">search</mat-icon>Search
+      <mat-icon style="transform: scale(1.25); margin-right: 10px"
+        >search</mat-icon
+      >Search
     </mat-label>
     <input
       matInput
@@ -10,19 +12,22 @@
       #input
     />
   </mat-form-field>
-  <button mat-raised-button style="float: right; margin-right: 30px;" (click)="addData()">
+  <button
+    mat-raised-button
+    style="float: right; margin-right: 30px"
+    (click)="addData()"
+  >
     Add data
   </button>
   <button
-  
-    style="float: right;margin-right: 10px;"
+    style="float: right; margin-right: 10px"
     mat-raised-button
     color="primary"
     (click)="removeSelectedRows()"
   >
     Remove Selected Rows
   </button>
-  
+
   <table mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
@@ -147,20 +152,7 @@
         [innerHTML]="element.address | highlightSearch: filterText"
       ></td>
     </ng-container>
-    <!--
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let element; index as idx" type="button">
-        <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item  >
-            Edit
-          </button>
-          <button mat-menu-item (click)="removeAt(idx)">Delete</button>
-        </mat-menu>
-      </td>
-    </ng-container>
--->
+
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element; index as idx" type="button">
