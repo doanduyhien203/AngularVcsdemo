@@ -12,22 +12,38 @@
       #input
     />
   </mat-form-field>
+  
   <button
     mat-raised-button
-    style="float: right; margin-right: 30px"
+    style="float: right; margin-right: 30px;margin-top: 25px;"
     (click)="addData()"
   >
     Add data
   </button>
   <button
-    style="float: right; margin-right: 10px"
+    style="float: right; margin-right: 10px;margin-top: 25px;"
     mat-raised-button
     color="primary"
     (click)="removeSelectedRows()"
   >
-    Remove Selected Rows
+    Remove Selected
   </button>
-
+  <form [formGroup]="filterForm">
+    <div mat-dialog-content class="filter__form" >
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender" multiple>
+            <mat-option
+              *ngFor="let gender of genderList"
+              [value]="gender"
+              >{{ gender }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
   <table mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
@@ -35,7 +51,7 @@
           (change)="$event ? masterToggle() : null"
           [checked]="selection.hasValue() && isAllSelected()"
           [indeterminate]="selection.hasValue() && !isAllSelected()"
-        >
+          [aria-label]="checkboxLabel()">
         </mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let element">
@@ -43,6 +59,7 @@
           (click)="$event.stopPropagation()"
           (change)="$event ? selection.toggle(element) : null"
           [checked]="selection.isSelected(element)"
+          [aria-label]="checkboxLabel(element)"
         >
         </mat-checkbox>
       </td>
@@ -124,7 +141,14 @@
       >
         Gender
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+      <td  mat-cell *matCellDef="let element">
+        <span class="badge badge-success green"
+        *ngIf="element.gender=='M'"
+        >Male</span>
+        <span class="badge badge-success red"
+        *ngIf="element.gender=='F'"
+        >Female</span>
+      </td>
     </ng-container>
     <ng-container matColumnDef="age">
       <th

@@ -5,17 +5,15 @@ import { AccountComponent } from './account/account.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
 
 const routes: Routes = [
-  {
-    path: 'sign-in-rf',
-    component: SignInRfComponent,
-  },
+
   {
     path: 'login',
     component: LoginComponent,
-  },
+  }, 
+  
+
   {
     path: 'register',
     component: RegisterComponent,
@@ -33,11 +31,15 @@ const routes: Routes = [
     ],
   },
 
+
+
+  
   {
-    path: '',
-    redirectTo: 'sign-in-rf',
-    pathMatch: 'full',
-  },
+    path: "",
+    redirectTo: 'login',
+    pathMatch: 'full'
+  }, 
+
 ];
 @NgModule({
   imports: [

@@ -3,6 +3,7 @@ table {
 }
 
 .mat-elevation-z8 {
+
   flex-direction: column;
   min-width: 1200px;
   margin-top: 40px;
@@ -177,4 +178,26 @@ th {
   width: 90px;
   height: 90px !important;
   overflow: hidden !important;
+}
+.badge  {
+  font-size: 13px;
+  
+  background-color:#E8FFF3;
+  color: #50CD89;
+  
+}
+.badge.red{
+  font-size: 13px;
+  
+  background-color:#FFF5F8;
+  color: #F1416C;
+  
+}
+
+.filter__form{
+   
+  float: right;
+  margin-top: -57px;
+  margin-right: 25px;
+  width: 80px;
 }

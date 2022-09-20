@@ -20,6 +20,7 @@ import {
 import { MatMenuTrigger } from '@angular/material/menu';
 
 import { AccountService } from '../_service/account.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'account-table',
@@ -51,7 +52,14 @@ export class AccountComponent implements AfterViewInit {
     public dialog: MatDialog,
     private datadialogRef: MatDialogRef<DataDialog>
   ) {}
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  ngOnInit() {
+    this.formSubscribe();
+    this.getFormsValue();
+  }
   addData() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '60%';
@@ -67,11 +75,7 @@ export class AccountComponent implements AfterViewInit {
     this.datadialogRef.close();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
+ 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -99,7 +103,12 @@ export class AccountComponent implements AfterViewInit {
       : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
   /** The label for the checkbox on the passed row */
-
+  checkboxLabel(row?: User): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.account_number + 1}`;
+  }
   filterText = '';
 
   applyFilter(event: Event) {
@@ -137,7 +146,50 @@ export class AccountComponent implements AfterViewInit {
       this.user = user;
     });
   }
+  genderList: string[] = ['M','F'];
+  filterValues = {
+    gender: [],}
+    filterForm = new FormGroup({
+      gender: new FormControl(),
+     
+    });
+    get gender() { return this.filterForm.get('gender'); }
+    formSubscribe() {
+      this.gender.valueChanges.subscribe(positionValue => {
+          this.filterValues['gender'] = positionValue
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+      });
+     
+     
+    }
+    getFormsValue() {
+      this.dataSource.filterPredicate = (data, filter: string): boolean => {
+        let searchString = JSON.parse(filter);
+        let isPositionAvailable = false;
+        if (searchString.gender.length) {
+          for (const d of searchString.gender) {
+            if (data.gender.trim() === d) {
+              isPositionAvailable = true;
+            }
+          }
+        } else {
+          isPositionAvailable = true;
+        }
+        const resultValue = isPositionAvailable 
+          ;
+          
+        return resultValue;
+  
+      }
+     
+    }
+
+
 }
+
+
+
+
 
 @Component({
   selector: 'data-dialog',

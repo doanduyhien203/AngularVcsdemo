@@ -33,7 +33,7 @@
 }
 
 .mat-toolbar {
-  background-color: aliceblue;
+  background-color: rgb(170, 128, 190);
   padding: 0px;
   margin: 0cm;
   border-bottom: 0.5px solid #f5e8e8 ;
@@ -48,11 +48,11 @@
   padding: 15px;
   width: 250px;
   height: 100%;
-  background-color: #181C32;
+  background-color: #5c3292;
   border-bottom: 1px solid rgb(42, 40, 80);
 }
 .side-title{
-  color: #FFFFFF;
+  color: #d2d5df;
   margin-left: 25px;
 
 }
