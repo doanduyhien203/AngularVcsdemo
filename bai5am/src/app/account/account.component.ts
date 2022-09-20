@@ -100,7 +100,12 @@ export class AccountComponent implements AfterViewInit {
       : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
   /** The label for the checkbox on the passed row */
-
+  checkboxLabel(row?: User): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.account_number + 1}`;
+  }
   filterText = '';
 
   applyFilter(event: Event) {
@@ -128,21 +133,6 @@ export class AccountComponent implements AfterViewInit {
       
     }
   }
-/*
-  openDialog(index: number) {
-    const data = this.dataSource.data.slice(index,index+1);
-    for( let i=0;i<data.length;i++){
-      console.log(data[i])
-    }
-    console.log(data)
-    const dialog = this.dialog.open(EditAccountComponent, {
-      width: '250px',
-      // Can be closed only by clicking the close button
-      disableClose: true,
-      data: data,
-    });
-  }
-  */
   user;
   editUser(user) {
     const dialogRef = this.dialog.open(EditDialog, {

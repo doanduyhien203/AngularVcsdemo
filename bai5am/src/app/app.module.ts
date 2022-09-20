@@ -12,11 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignInRfComponent } from './sign-in-rf/sign-in-rf.component';
-import { RegisterComponent } from './register/register.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatSortModule } from '@angular/material/sort';
 import { AlertComponent } from './alert/alert.component';
@@ -32,9 +30,12 @@ import {
   EditDialog,
 } from './account/account.component';
 import { LoginComponent } from './login/login.component';
-import { RegisUserComponent } from './regis-user/regis-user.component';
+import { RegisterComponent } from './register/register.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatCheckboxModule,
     MatButtonModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatTableModule,
@@ -63,19 +65,22 @@ import { DialogModule } from '@angular/cdk/dialog';
 
   declarations: [
     AppComponent,
-    SignInRfComponent,
-    RegisterComponent,
     HomeComponent,
     AccountComponent,
     AlertComponent,
     HighlightSearchPipe,
     LoginComponent,
-    RegisUserComponent,
+    RegisterComponent,
     DataDialog,
     EditDialog,
   ],
   bootstrap: [AppComponent],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider,
     DatePipe,
     {
       provide: MatDialogRef,

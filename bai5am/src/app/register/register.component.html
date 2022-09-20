@@ -1,59 +1,141 @@
+<!--
+<div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <div class="login100-pic js-tilt"></div>
+          <form class="login100-form validate-form" [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()">
+            <title class="login100-form-title">Register</title>
+            <div class="wrap-input100">
+              <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Username" formControlName="username" />
+                
+              </mat-form-field>
+         
+              
+              
+            <div class="wrap-input100">
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" />
+              </mat-form-field>
+             
+            </div>
+            <div class="wrap-input100">
+              <mat-form-field appearance="outline">
+                
+                <mat-label>Password</mat-label>  
+                <input type="password" matInput placeholder="Password" formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                />
+                
+                <i class="far fa-eye eye-show" 
+                (click)="showPassword = !showPassword"
+                [class.hide]="showPassword"></i>
+                <i alt="hide" class="far fa-eye-slash eye-hide" 
+                (click)="showPassword = !showPassword"
+                [class.hide]="!showPassword"></i>
+            
+              </mat-form-field>
+            
+             
+            </div>
+            <div class="wrap-input100">
+              <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword" />
+              </mat-form-field>
+             
+            </div>
+            <div class="container-login100-form-btn">
+              <button class="login100-form-btn" mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" routerLink="/sign-in-rf">
+                Register
+              </button>
+            </div>
+            <pre>{{ registerForm.value | json }}</pre>
+            <pre> {{ registerForm.errors | json }} </pre>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  -->
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
       <div class="login100-pic js-tilt"></div>
-        <form class="login100-form validate-form" [formGroup]="registerForm" autocomplete="off" (ngSubmit)="formSubmit$.next(true)">
-          <title class="login100-form-title">Register</title>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              <mat-label>Username</mat-label>
-              <input matInput placeholder="Username" formControlName="username" />
-              
-            </mat-form-field>
-       
+      <form
+        class="login100-form validate-form"
+        [formGroup]="registerForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit()"
+      >
+        <title class="login100-form-title">Register</title>
+        <div class="wrap-input100 form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username" 
+            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"/>
+            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+              <div *ngIf="f['username'].errors['required']">UserName is required</div>
+          </div>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"/>
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+              <div *ngIf="f['email'].errors['required']">UserName is required</div>
+          </div>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              [type]="showPassword ? 'text' : 'password'"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                  <div *ngIf="f['password'].errors['required']">Username is required</div>
+              </div>
+           
+            <!--
+                <i class="far fa-eye eye-show" 
+                (click)="showPassword = !showPassword"
+                [class.hide]="showPassword"></i>
+                <i alt="hide" class="far fa-eye-slash eye-hide" 
+                (click)="showPassword = !showPassword"
+                [class.hide]="!showPassword"></i>
+            -->
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Confirm Password"
+              formControlName="confirmPassword"
+            />
+          </mat-form-field>
+        </div>
+        <div class="container-login100-form-btn">
+          <button
+            class="login100-form-btn"
+            mat-raised-button
+            color="primary"
+            type="submit"
             
-            <!--    <pre>{{ registerForm.get("username")?.errors }}</pre>-->
-          </div>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="email" />
-            </mat-form-field>
-            <!--    <pre>{{ registerForm.get("username")?.errors | json }}</pre>-->
-          </div>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              
-              <mat-label>Password</mat-label>  
-              <input type="password" matInput placeholder="Password" formControlName="password" [type]="showPassword ? 'text' : 'password'"
-              />
-              <!--
-              <i class="far fa-eye eye-show" 
-              (click)="showPassword = !showPassword"
-              [class.hide]="showPassword"></i>
-              <i alt="hide" class="far fa-eye-slash eye-hide" 
-              (click)="showPassword = !showPassword"
-              [class.hide]="!showPassword"></i>
-          -->
-            </mat-form-field>
-          
-            <!--     <pre>{{ registerForm.get("password")?.errors | json }}</pre>-->
-          </div>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              <mat-label>Confirm Password</mat-label>
-              <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword" />
-            </mat-form-field>
-            <!--    <pre>{{ registerForm.get("confirmPassword")?.errors | json }}</pre>-->
-          </div>
-          <div class="container-login100-form-btn">
-            <button class="login100-form-btn" mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" routerLink="/sign-in-rf">
-              Register
-            </button>
-          </div>
-          <pre>{{ registerForm.value | json }}</pre>
-          <pre> {{ registerForm.errors | json }} </pre>
-        </form>
-      </div>
+           >
+            Register
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>

@@ -6,15 +6,15 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { map, Observable, Subject, timer, tap, take, startWith } from 'rxjs';
+import { map, Observable, Subject, timer } from 'rxjs';
 import { ApiService } from '../_service/api.service';
-import { filter, switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../_service/alert.service';
 import { UserLoginService } from '../_service/userlogin.service';
+import { AlertService } from '../_service/alert.service';
 
-const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{6,32}$/;
-const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{6,32}$/;
+const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{4,32}$/;
+const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{4,32}$/;
 
 const validateUsernameFromApi = (api: ApiService) => {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
@@ -68,23 +68,37 @@ const validateMatchedControlsValue = (
 };
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-regis-user',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  formSubmit$ = new Subject<boolean | null>();
 
   showPassword: boolean = false;
+  loading = false;
+  submitted = false;
 
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private loginService: UserLoginService,
+    private alertService: AlertService
+  ) {
+    // redirect to home if already logged in
+    if (this.loginService.userValue) {
+      this.router.navigate(['/']);
+    }
+  }
   registerForm = this.fb.group(
     {
       username: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(/^[a-z]{6,32}$/i),
+          Validators.minLength(4),
+          Validators.pattern(/^[a-z]{4,32}$/i),
         ]),
         validateUsernameFromApiDebounce(this.api),
       ],
@@ -92,7 +106,7 @@ export class RegisterComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
+          Validators.minLength(4),
           Validators.pattern(EMAIL_PATTERN),
         ]),
       ],
@@ -100,7 +114,7 @@ export class RegisterComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
+          Validators.minLength(4),
           Validators.pattern(PASSWORD_PATTERN),
         ]),
       ],
@@ -108,7 +122,7 @@ export class RegisterComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
+          Validators.minLength(4),
           Validators.pattern(PASSWORD_PATTERN),
         ]),
       ],
@@ -117,15 +131,12 @@ export class RegisterComponent implements OnInit {
       validators: validateMatchedControlsValue('password', 'confirmPassword'),
     }
   );
-
-  constructor(private fb: FormBuilder, private api: ApiService) {}
-
   get f() {
     return this.registerForm.controls;
   }
 
   ngOnInit(): void {
-    this.formSubmit$
+    /*    this.formSubmit$
       .pipe(
         tap(() => this.registerForm.markAsDirty()),
         switchMap(() =>
@@ -141,6 +152,35 @@ export class RegisterComponent implements OnInit {
         })
       )
       .subscribe();
+      */
   }
-  submitForm(): void {}
+  // submitForm(): void {}
+  onSubmit() {
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return ;
+    }
+
+    this.loading = true;
+    this.loginService
+      .register(this.registerForm.value)
+      .pipe(first())
+      .subscribe(
+        (data) => {
+          this.alertService.success('Registration successful', {
+            keepAfterRouteChange: true,
+          });
+          this.router.navigate(['../login'], { relativeTo: this.route });
+        },
+        (error) => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      );
+  }
 }
