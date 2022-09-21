@@ -37,6 +37,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MatSelectModule } from '@angular/material/select';
+import { AddEditComponent } from './users/add-edit.component';
+import { ListComponent } from './users/list.component';
 
 @NgModule({
   imports: [
@@ -75,6 +77,8 @@ import { MatSelectModule } from '@angular/material/select';
     RegisterComponent,
     DataDialog,
     EditDialog,
+    AddEditComponent,
+    ListComponent
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -23,7 +23,7 @@
     "importHelpers": true,
     "useUnknownInCatchVariables": false,
     "suppressImplicitAnyIndexErrors": true,
-
+    "noUnusedLocals": false,
     "target": "es2020",
     "module": "es2020",
     "lib": [

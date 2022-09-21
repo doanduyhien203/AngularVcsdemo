@@ -13,7 +13,7 @@ import { UserLoginService } from '../_service/userlogin.service';
 import { AlertService } from '../_service/alert.service';
 
 const PASSWORD_PATTERN = /^[a-z0-9!@#$%^&*]{4,32}$/;
-const EMAIL_PATTERN = /^(?=.*[.@]+)[a-z0-9!@#$%^&*.]{4,50}$/;
+
 
 
 const validateMatchedControlsValue = (
@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-  
     private route: ActivatedRoute,
     private router: Router,
     private loginService: UserLoginService,
@@ -77,7 +76,6 @@ export class RegisterComponent implements OnInit {
           Validators.email,
           Validators.required,
           Validators.minLength(4),
-          Validators.pattern(EMAIL_PATTERN),
         ]),
       ],
       password: [
@@ -141,7 +139,7 @@ export class RegisterComponent implements OnInit {
       .register(this.registerForm.value)
       .pipe(first())
       .subscribe(
-        (data) => {
+        _data => {
           this.alertService.success('Registration successful', {
             keepAfterRouteChange: true,
           });
