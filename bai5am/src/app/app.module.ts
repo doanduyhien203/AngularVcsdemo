@@ -39,6 +39,7 @@ import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MatSelectModule } from '@angular/material/select';
 import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { ListComponent } from './users/list.component';
     DataDialog,
     EditDialog,
     AddEditComponent,
-    ListComponent
+    ListComponent,
+    DialogComponent
   ],
   bootstrap: [AppComponent],
   providers: [

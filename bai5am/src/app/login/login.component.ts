@@ -64,14 +64,14 @@ export class LoginComponent implements OnInit {
     this.loginService
       .login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
-      .subscribe(
-        _data => {
+      .subscribe({
+        next: (data )=> {
           this.router.navigate([this.returnUrl]);
         },
-        (error) => {
+        error: (error) => {
           this.alertService.error(error);
           this.loading = false;
-        }
+        }}
       );
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -28,7 +29,10 @@ const routes: Routes = [
       path: 'edit',
       component: AddEditComponent,
     },
-    
+  {
+    path:'dialog',
+    component: DialogComponent,
+  } ,
   {
     path: 'home',
     component: HomeComponent,

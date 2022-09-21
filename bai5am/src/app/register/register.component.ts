@@ -138,17 +138,17 @@ export class RegisterComponent implements OnInit {
     this.loginService
       .register(this.registerForm.value)
       .pipe(first())
-      .subscribe(
-        _data => {
+      .subscribe({
+        next: (data) => {
           this.alertService.success('Registration successful', {
             keepAfterRouteChange: true,
           });
           this.router.navigate(['../login'], { relativeTo: this.route });
         },
-        (error) => {
+        error: (error) => {
           this.alertService.error(error);
           this.loading = false;
-        }
+        }}
       );
   }
   public togglePasswordVisibility(): void {

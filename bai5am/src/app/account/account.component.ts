@@ -57,8 +57,8 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    this.formSubscribe();
-    this.getFormsValue();
+    //this.formSubscribe();
+    //this.getFormsValue();
   }
   addData() {
     const dialogConfig = new MatDialogConfig();
@@ -147,7 +147,7 @@ export class AccountComponent implements AfterViewInit {
     });
   }
   genderList: string[] = ['M','F'];
-  filterValues = {
+  filterValues1 = {
     gender: [],}
     filterForm = new FormGroup({
       gender: new FormControl(),
@@ -156,15 +156,15 @@ export class AccountComponent implements AfterViewInit {
     get gender() { return this.filterForm.get('gender'); }
     formSubscribe() {
       this.gender.valueChanges.subscribe(positionValue => {
-          this.filterValues['gender'] = positionValue
-          this.dataSource.filter = JSON.stringify(this.filterValues);
+          this.filterValues1['gender'] = positionValue
+          this.dataSource.filter = JSON.stringify(this.filterValues1);
       });
      
      
     }
     getFormsValue() {
-      this.dataSource.filterPredicate = (data, filter: string): boolean => {
-        let searchString = JSON.parse(filter);
+      this.dataSource.filterPredicate = (data, filter1: string): boolean => {
+        let searchString = JSON.parse(filter1);
         let isPositionAvailable = false;
         if (searchString.gender.length) {
           for (const d of searchString.gender) {

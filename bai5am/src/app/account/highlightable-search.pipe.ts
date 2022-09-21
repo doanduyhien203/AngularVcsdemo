@@ -5,7 +5,7 @@ import { DomSanitizer,SafeHtml} from '@angular/platform-browser';
   name: 'highlightSearch',
 })
 export class HighlightSearchPipe implements PipeTransform {
- 
+
   transform(value: string, search: string): string {
     const valueStr = value + ''; // Ensure numeric values are converted to strings
     return valueStr.replace(
@@ -18,10 +18,11 @@ export class HighlightSearchPipe implements PipeTransform {
       
         
     );
-   
+  
   }
-
- /*
+}
+/*
+ 
   constructor(private _sanitizer: DomSanitizer) { }
 
   transform(list: any, searchText: string): any {
@@ -35,5 +36,6 @@ export class HighlightSearchPipe implements PipeTransform {
 
     return this._sanitizer.bypassSecurityTrustHtml(value);
   }
-  */
+  
 }
+ */

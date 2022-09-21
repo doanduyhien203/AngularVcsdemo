@@ -22,18 +22,20 @@
 
 .log-out {
   position: absolute;
-  right: 20px;
+  right: 50px;
+
 }
 
 .mat-drawer {
+  color: #ffac42;
   width: 250px;
   height: 100%;
-  background-color: #1E1E2D;
+  background-color: #5d99c6;
 
 }
 
 .mat-toolbar {
-  background-color: rgb(170, 128, 190);
+  background-color: #90caf9;
   padding: 0px;
   margin: 0cm;
   border-bottom: 0.5px solid #f5e8e8 ;
@@ -43,24 +45,35 @@
 }
 
 .tool-side {
-  color: #5E6278;
+  color: #f47b00;
   display: flex;
   padding: 15px;
   width: 250px;
   height: 100%;
-  background-color: #5c3292;
-  border-bottom: 1px solid rgb(42, 40, 80);
+  background-color: #5d99c6;
+  border-bottom: 1px solid ;
+  cursor: pointer;
 }
 .side-title{
-  color: #d2d5df;
-  margin-left: 25px;
+  
+  margin-left: 30px;
 
 }
-.tool-side:hover span{
-  color: aqua;
+.side-title:hover span{
+  color:#ba4c00;
 }
+
 .container-page {
   
   height: 70px;
   margin: 0px;
+}
+.user-edit{
+  margin-left: 1320px;
+}
+.user-edit:hover{
+  color: #ba4c00;
+}
+.log-out:hover{
+  color: #ba4c00;
 }

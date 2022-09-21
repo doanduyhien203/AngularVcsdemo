@@ -9,22 +9,22 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="side-title">My App</span>
+      <span class="side-title hover:color:#ba4c00">My App</span>
       <div style="margin-left: 150px">
         <h1>Account List</h1>
       </div>
-      <h1>Hi {{user.username}}!</h1>
-      <button mat-icon-button class='user-edit' routerLink="../edit"><mat-icon>manage_accounts</mat-icon></button>
+      
+      <button mat-icon-button class='user-edit'  routerLink="../edit"><mat-icon>manage_accounts</mat-icon></button>
       <button mat-icon-button class="log-out" routerLink="../login"
-      color="black">
-        <mat-icon>logout</mat-icon>
+    >
+        <mat-icon color="#ba4c00" >logout</mat-icon>
       </button>
     </div>
   </mat-toolbar>
 </p>
 <mat-drawer-container class="example-container">
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <span>Auto-resizing sidenav</span>
+    <h1>Hi {{user.username}}</h1>
   </mat-drawer>
 
   <div class="example-sidenav-content">
