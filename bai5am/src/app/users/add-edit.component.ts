@@ -9,7 +9,7 @@ import { UserLoginService } from "../_service/userlogin.service";
 export class AddEditComponent implements OnInit {
     form: FormGroup;
     id: string;
-    isAddMode : boolean = false;
+    isAddMode : boolean ;
     loading = false;
     submitted = false;
 
@@ -23,8 +23,8 @@ export class AddEditComponent implements OnInit {
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
+        this.isAddMode = !this.id;
         this.isAddMode = false;
-        
         // password not required in edit mode
         const passwordValidators = [Validators.minLength(4)];
         if (this.isAddMode) {
@@ -32,7 +32,7 @@ export class AddEditComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
-
+           
             username: ['', Validators.required],
             email: ['', Validators.required],
             password: ['', passwordValidators]
@@ -44,7 +44,7 @@ export class AddEditComponent implements OnInit {
                 .subscribe(x => {
                    
                     this.f['username'].setValue(x.username);
-                    this.f['email'].setValue(x.username);
+                    this.f['email'].setValue(x.email);
                 });
         }
     }
@@ -74,22 +74,22 @@ export class AddEditComponent implements OnInit {
     private createUser() {
         this.loginService.register(this.form.value)
             .pipe(first())
-            .subscribe(
-                data => {
+            .subscribe({
+                next: (data) => {
                     this.alertService.success('User added successfully', { keepAfterRouteChange: true });
                     this.router.navigate(['../login', { relativeTo: this.route }]);
                 },
-                error => {
+                error: (error) => {
                     this.alertService.error(error);
                     this.loading = false;
-                });
+                }});
     }
 
     private updateUser() {
         this.loginService.update(this.id, this.form.value)
             .pipe(first())
             .subscribe(
-                data => {
+                _data => {
                     this.alertService.success('Update successful', { keepAfterRouteChange: true });
                     this.router.navigate(['..', { relativeTo: this.route }]);
                 },
