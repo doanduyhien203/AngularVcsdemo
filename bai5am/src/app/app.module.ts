@@ -28,10 +28,11 @@ import {
   AccountComponent,
   DataDialog,
   EditDialog,
+  SuccessDialog,
 } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
@@ -40,6 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
 import { DialogComponent } from './dialog/dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   imports: [
@@ -64,6 +67,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatSelectModule,
     DialogModule,
     MatDialogModule,
+    MatIconModule,
+    MatRadioModule,
     MatSidenavModule,
     AppRoutingModule,
   ],
@@ -80,7 +85,8 @@ import { DialogComponent } from './dialog/dialog.component';
     EditDialog,
     AddEditComponent,
     ListComponent,
-    DialogComponent
+    SuccessDialog,
+    DialogComponent,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -93,7 +99,8 @@ import { DialogComponent } from './dialog/dialog.component';
     {
       provide: MatDialogRef,
       useValue: {},
-    },
+    }, 
+  
   ],
 })
 export class AppModule {}

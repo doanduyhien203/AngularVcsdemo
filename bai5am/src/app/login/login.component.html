@@ -39,7 +39,7 @@
               matInput
             placeholder="Password"
               formControlName="password"
-              
+              [type]="showPassword ? 'text' : 'password'"
               [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
             />
             <div
@@ -50,6 +50,9 @@
                 Password is required
               </div>
             </div>
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{ showPassword ? "visibility_off" : "visibility" }}
+            </mat-icon>
           </mat-form-field>
         </div>
         <div class="wrap-input100">

@@ -1,0 +1,15 @@
+.dialog{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+} 
+.mat-form-field{
+    width: 250px ;
+}
+.mat-dialog-content{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;    
+}

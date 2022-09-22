@@ -57,12 +57,13 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    //this.formSubscribe();
-    //this.getFormsValue();
+    this.formSubscribe();
+    this.getFormsValue();
   }
   addData() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '60%';
+    dialogConfig.width = '350px';
+    
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     const dataRef = this.dialog.open(DataDialog, dialogConfig);
@@ -70,12 +71,33 @@ export class AccountComponent implements AfterViewInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+  
+  user;
+  editUser(user) {
+    const dialogRef = this.dialog.open(EditDialog, {
+      width: '350px',
+      data: user,
+    });
 
+    dialogRef.afterClosed().subscribe((result) => {
+      this.user = user;
+    });
+  }
   onNoClick(): void {
     this.datadialogRef.close();
   }
 
- 
+  removeAt(index: number) {
+    const deleteItem = confirm('Are you sure you want to delete ?');
+    if (deleteItem) {
+      const data = this.dataSource.data;
+      data.splice(
+        this.paginator.pageIndex * this.paginator.pageSize + index,
+        1
+      );
+      this.dataSource.data = data;
+    }
+  }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -123,29 +145,8 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  removeAt(index: number) {
-    const deleteItem = confirm('Are you sure you want to delete ?');
-    if (deleteItem) {
-      const data = this.dataSource.data;
-      data.splice(
-        this.paginator.pageIndex * this.paginator.pageSize + index,
-        1
-      );
-      this.dataSource.data = data;
-    }
-  }
+  
 
-  user;
-  editUser(user) {
-    const dialogRef = this.dialog.open(EditDialog, {
-      width: '250px',
-      data: user,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      this.user = user;
-    });
-  }
   genderList: string[] = ['M','F'];
   filterValues1 = {
     gender: [],}
@@ -179,7 +180,7 @@ export class AccountComponent implements AfterViewInit {
           ;
           
         return resultValue;
-  
+        this.dataSource.filter = JSON.stringify(this.filterValues1);
       }
      
     }
@@ -194,6 +195,7 @@ export class AccountComponent implements AfterViewInit {
 @Component({
   selector: 'data-dialog',
   templateUrl: './data-dialog.html',
+  styleUrls: ['./data-dialog.css'],
 })
 export class DataDialog implements OnInit {
   dataSource = new MatTableDataSource<User>();
@@ -219,9 +221,12 @@ export class DataDialog implements OnInit {
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: './dialog.html',
+  styleUrls: ['./dialog.css'],
 })
 export class EditDialog {
   constructor(
+    public dialog: MatDialog,
+ 
     public dialogRef: MatDialogRef<EditDialog>,
     @Inject(MAT_DIALOG_DATA) public data: User
   ) {}
@@ -229,4 +234,22 @@ export class EditDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  successclick(){
+    const dialogRef = this.dialog.open(SuccessDialog, {
+      width: '250px', 
+      height:'300px'  ,               
+  })
+  }
 }
+
+@Component({
+  selector:'success-dialog',
+  templateUrl: '../dialog/dialog.component.html',
+})
+export class SuccessDialog{
+  constructor(
+    public dialogRef: MatDialogRef<SuccessDialog>,
+  ){}
+
+  }
+

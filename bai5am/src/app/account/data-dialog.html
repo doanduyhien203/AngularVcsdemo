@@ -1,10 +1,11 @@
 <form #form="ngForm" novalidate (ngSubmit)="onSubmit(form.value)">
   <div class="example-container">
     <input type="hidden" ngModel name="id" />
-
+    <div mat-dialog-title>Add Account</div>
     <mat-form-field>
       <input
         matInput
+        type="number"
         name="account_number"
         required
         ngModel
@@ -15,6 +16,7 @@
     <mat-form-field>
       <input
         matInput
+        type="number"
         #lname
         name="balance"
         required
@@ -54,18 +56,26 @@
         placeholder="Email"
       />
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select [ngModel] name="gender">
+        <mat-option value="M"> Male </mat-option>
+        <mat-option value="F"> Female </mat-option>
+        <mat-option value="O">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field>
       <input
         matInput
+        type="number"
         #lname
-        name="gender"
+        name="age"
         required
         ngModel
-        placeholder="Gender"
+        placeholder="Age"
       />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput #lname name="age" required ngModel placeholder="Age" />
     </mat-form-field>
     <mat-form-field>
       <input

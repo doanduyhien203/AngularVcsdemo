@@ -139,7 +139,7 @@ export class RegisterComponent implements OnInit {
       .register(this.registerForm.value)
       .pipe(first())
       .subscribe({
-        next: (data) => {
+        next: (_data) => {
           this.alertService.success('Registration successful', {
             keepAfterRouteChange: true,
           });

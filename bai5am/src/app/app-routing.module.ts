@@ -10,29 +10,28 @@ import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
 
 const routes: Routes = [
-
   {
     path: 'login',
     component: LoginComponent,
-  }, 
-  
+  },
 
-    {
-      path: 'register',
-      component: RegisterComponent,
-    },
-    {
-      path: 'list',
-      component: ListComponent,
-    },
-    {
-      path: 'edit',
-      component: AddEditComponent,
-    },
   {
-    path:'dialog',
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'list',
+    component: ListComponent,
+  },
+  {
+    path: 'edit',
+    component: AddEditComponent,
+  },
+  { path: 'edit/:id', component: AddEditComponent },
+  {
+    path: 'dialog',
     component: DialogComponent,
-  } ,
+  },
   {
     path: 'home',
     component: HomeComponent,
@@ -45,15 +44,11 @@ const routes: Routes = [
     ],
   },
 
-
-
-  
   {
-    path: "",
+    path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
-  }, 
-
+    pathMatch: 'full',
+  },
 ];
 @NgModule({
   imports: [
