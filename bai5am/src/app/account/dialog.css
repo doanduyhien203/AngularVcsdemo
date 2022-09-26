@@ -1,8 +1,10 @@
-.dialog{
+::ng-deep .dialog{
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
+    overflow: hidden !important;
+    
 } 
 .mat-form-field{
     width: 250px ;
@@ -11,5 +13,7 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column; 
+  
+   
 }

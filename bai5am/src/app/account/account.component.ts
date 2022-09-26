@@ -57,7 +57,7 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    this.formSubscribe();
+   this.formSubscribe();
     this.getFormsValue();
   }
   addData() {
@@ -75,7 +75,8 @@ export class AccountComponent implements AfterViewInit {
   user;
   editUser(user) {
     const dialogRef = this.dialog.open(EditDialog, {
-      width: '350px',
+      width: '325px',
+      
       data: user,
     });
 
@@ -180,7 +181,7 @@ export class AccountComponent implements AfterViewInit {
           ;
           
         return resultValue;
-        this.dataSource.filter = JSON.stringify(this.filterValues1);
+        
       }
      
     }

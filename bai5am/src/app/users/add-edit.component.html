@@ -1,39 +1,68 @@
 <h1 *ngIf="isAddMode">Add User</h1>
 <h1 *ngIf="!isAddMode">Edit User</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
-    <div class="form-group col">
-        <label for="email">Email</label>
-        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+  <div class="form-group col">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      formControlName="email"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+    />
+    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback"></div>
+  </div>
+  <div class="form-group col">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      formControlName="username"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+    />
+    <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+      <div *ngIf="f['username'].errors['required']">Username is required</div>
+    </div>
+  </div>
+  <div class="form-group col" *ngIf="!isAddMode" type=hidden>
+    <label for="oldpass"> Old Password </label>
+    <input
        
-        </div>
+      formControlName="oldpass"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['oldpass'].errors }"
+    />
+    <div *ngIf="submitted && f['oldpass'].errors" class="invalid-feedback">
+      <div *ngIf="f['oldpass'].errors['required']">Please input olpass</div>
     </div>
-        <div class="form-group col">
-            <label for="username">Username</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
-            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                <div *ngIf="f['username'].errors['required']">Username is required</div>
-            </div>
-        </div>
-        
-        <div class="form-group col">
-            <label for="password">
-                Password
-                <em *ngIf="!isAddMode">(Leave blank to keep the same password)</em>
-            </label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
-            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                <div *ngIf="f['password'].errors['required']">Password is required</div>
-                
-            </div>
-        </div>
+  </div>
+  <div class="form-group col">
+    <label for="password">
+      Password
+      <em *ngIf="!isAddMode">(Leave blank to keep the same password)</em>
+    </label>
+    <input
     
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Save
-        </button>
-        <a routerLink="../home" class="btn btn-link">Cancel</a>
+      formControlName="password"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+    />
+    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+      <div *ngIf="f['password'].errors['required']">Password is required</div>
+      <mat-icon matSuffix (click)="togglePasswordVisibility()">
+        {{ showPassword ? "visibility_off" : "visibility" }}
+      </mat-icon>
     </div>
+  </div>
+
+  <div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">
+      <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm mr-1"
+      
+      ></span>
+      Save
+    </button>
+    <a routerLink="/home" class="btn btn-link">Cancel</a>
+  </div>
 </form>

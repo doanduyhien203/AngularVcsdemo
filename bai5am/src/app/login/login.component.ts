@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
       .login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
-        next: (data )=> {
+        next: (_data )=> {
           this.router.navigate([this.returnUrl]);
         },
         error: (error) => {

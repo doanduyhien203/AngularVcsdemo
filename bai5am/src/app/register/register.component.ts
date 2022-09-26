@@ -13,9 +13,6 @@ import { UserLoginService } from '../_service/userlogin.service';
 import { AlertService } from '../_service/alert.service';
 
 const PASSWORD_PATTERN = /^[a-z0-9!@#$%^&*]{4,32}$/;
-
-
-
 const validateMatchedControlsValue = (
   firstControlName: string,
   secondControlName: string
@@ -44,6 +41,7 @@ const validateMatchedControlsValue = (
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+[x: string]: any;
   showPassword1: boolean = false;
   showPassword: boolean = false;
   loading = false;
@@ -54,7 +52,7 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loginService: UserLoginService,
-    private alertService: AlertService
+   private alertService: AlertService
   ) {
     // redirect to home if already logged in
     
@@ -143,7 +141,7 @@ export class RegisterComponent implements OnInit {
           this.alertService.success('Registration successful', {
             keepAfterRouteChange: true,
           });
-          this.router.navigate(['../login'], { relativeTo: this.route });
+          this.router.navigate(['/login'], { relativeTo: this.route });
         },
         error: (error) => {
           this.alertService.error(error);

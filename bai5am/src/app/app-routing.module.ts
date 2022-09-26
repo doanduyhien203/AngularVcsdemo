@@ -24,7 +24,11 @@ const routes: Routes = [
     component: ListComponent,
   },
   {
-    path: 'edit',
+    path: 'add',
+    component: AddEditComponent,
+  },
+  {
+    path: 'list/add',
     component: AddEditComponent,
   },
   { path: 'edit/:id', component: AddEditComponent },
@@ -32,6 +36,7 @@ const routes: Routes = [
     path: 'dialog',
     component: DialogComponent,
   },
+
   {
     path: 'home',
     component: HomeComponent,

@@ -1,10 +1,34 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs";
 import { AlertService } from "../_service/alert.service";
 import { UserLoginService } from "../_service/userlogin.service";
 
+
+
+   
+const validateMatchedControlsValue = (
+    firstControlName: string,
+    secondControlName: string
+  ) => {
+    return function (formGroup: FormGroup): ValidationErrors | null {
+      const { value: firstControlValue } = formGroup.get(
+        firstControlName
+      ) as AbstractControl;
+      const { value: secondControlValue } = formGroup.get(
+        secondControlName
+      ) as AbstractControl;
+      return firstControlValue === secondControlValue
+        ? null
+        : {
+            valueNotMatch: {
+              firstControlValue,
+              secondControlValue,
+            },
+          };
+    };
+  };
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form: FormGroup;
@@ -12,7 +36,7 @@ export class AddEditComponent implements OnInit {
     isAddMode : boolean ;
     loading = false;
     submitted = false;
-
+    confirm : string;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -23,8 +47,9 @@ export class AddEditComponent implements OnInit {
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
+        
         this.isAddMode = !this.id;
-        this.isAddMode = false;
+  
         // password not required in edit mode
         const passwordValidators = [Validators.minLength(4)];
         if (this.isAddMode) {
@@ -32,19 +57,23 @@ export class AddEditComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
-           
-            username: ['', Validators.required],
             email: ['', Validators.required],
-            password: ['', passwordValidators]
-        });
+            username: ['', Validators.required],
+           
+            oldpass:['',Validators.required],
+            password: ['', passwordValidators],
+        }
+       // ,{ validators: validateMatchedControlsValue('oldpass', 'confirm')}
+          
+        );
 
         if (!this.isAddMode) {
             this.loginService.getById(this.id)
                 .pipe(first())
-                .subscribe(x => {
-                   
+                .subscribe(x => {   
+                    this.f['email'].setValue(x.email);  
                     this.f['username'].setValue(x.username);
-                    this.f['email'].setValue(x.email);
+                    this.confirm=x.confirmPassword;
                 });
         }
     }
@@ -91,11 +120,15 @@ export class AddEditComponent implements OnInit {
             .subscribe({
                 next: (_data) => {
                     this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['..', { relativeTo: this.route }]);
+                    this.router.navigate(['../login', { relativeTo: this.route }]);
                 },
                 error: (error) => {
                     this.alertService.error(error);
                     this.loading = false;
                 }});
     }
+    showPassword: boolean = false;
+     public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 }
