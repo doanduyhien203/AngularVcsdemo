@@ -21,6 +21,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
 
 import { AccountService } from '../_service/account.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 @Component({
   selector: 'account-table',
@@ -57,13 +59,13 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-   this.formSubscribe();
+    this.formSubscribe();
     this.getFormsValue();
   }
   addData() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '350px';
-    
+
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     const dataRef = this.dialog.open(DataDialog, dialogConfig);
@@ -71,12 +73,11 @@ export class AccountComponent implements AfterViewInit {
       this.dataSource.paginator = this.paginator;
     });
   }
-  
+
   user;
   editUser(user) {
     const dialogRef = this.dialog.open(EditDialog, {
-      width: '325px',
-      
+      width: '350px',
       data: user,
     });
 
@@ -87,7 +88,7 @@ export class AccountComponent implements AfterViewInit {
   onNoClick(): void {
     this.datadialogRef.close();
   }
-
+/*
   removeAt(index: number) {
     const deleteItem = confirm('Are you sure you want to delete ?');
     if (deleteItem) {
@@ -99,6 +100,21 @@ export class AccountComponent implements AfterViewInit {
       this.dataSource.data = data;
     }
   }
+  */
+  removeAt(index: number) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      const data = this.dataSource.data;
+      data.splice(
+        this.paginator.pageIndex * this.paginator.pageSize + index,
+        1
+      );
+      this.dataSource.data = data;
+    }
+  } );
+}
+  
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -130,7 +146,9 @@ export class AccountComponent implements AfterViewInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.account_number + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.account_number + 1
+    }`;
   }
   filterText = '';
 
@@ -146,52 +164,41 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  
-
-  genderList: string[] = ['M','F'];
+  genderList: string[] = ['M', 'F'];
   filterValues1 = {
-    gender: [],}
-    filterForm = new FormGroup({
-      gender: new FormControl(),
-     
+    gender: [],
+  };
+  filterForm = new FormGroup({
+    gender: new FormControl(),
+  });
+  get gender() {
+    return this.filterForm.get('gender');
+  }
+  formSubscribe() {
+    this.gender.valueChanges.subscribe((positionValue) => {
+      this.filterValues1['gender'] = positionValue;
+      this.dataSource.filter = JSON.stringify(this.filterValues1);
     });
-    get gender() { return this.filterForm.get('gender'); }
-    formSubscribe() {
-      this.gender.valueChanges.subscribe(positionValue => {
-          this.filterValues1['gender'] = positionValue
-          this.dataSource.filter = JSON.stringify(this.filterValues1);
-      });
-     
-     
-    }
-    getFormsValue() {
-      this.dataSource.filterPredicate = (data, filter1: string): boolean => {
-        let searchString = JSON.parse(filter1);
-        let isPositionAvailable = false;
-        if (searchString.gender.length) {
-          for (const d of searchString.gender) {
-            if (data.gender.trim() === d) {
-              isPositionAvailable = true;
-            }
+  }
+  getFormsValue() {
+    this.dataSource.filterPredicate = (data, filter1: string): boolean => {
+      let searchString = JSON.parse(filter1);
+      let isPositionAvailable = false;
+      if (searchString.gender.length) {
+        for (const d of searchString.gender) {
+          if (data.gender.trim() === d) {
+            isPositionAvailable = true;
           }
-        } else {
-          isPositionAvailable = true;
         }
-        const resultValue = isPositionAvailable 
-          ;
-          
-        return resultValue;
-        
+      } else {
+        isPositionAvailable = true;
       }
-     
-    }
+      const resultValue = isPositionAvailable;
 
-
+      return resultValue;
+    };
+  }
 }
-
-
-
-
 
 @Component({
   selector: 'data-dialog',
@@ -202,6 +209,7 @@ export class DataDialog implements OnInit {
   dataSource = new MatTableDataSource<User>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<DataDialog>,
     @Inject(MAT_DIALOG_DATA) public data: User,
     private dataService: AccountService
@@ -217,6 +225,9 @@ export class DataDialog implements OnInit {
     this.dataService.addAccount(formData);
     this.dialogRef.close(false);
   }
+  successclick() {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {});
+  }
 }
 
 @Component({
@@ -227,7 +238,7 @@ export class DataDialog implements OnInit {
 export class EditDialog {
   constructor(
     public dialog: MatDialog,
- 
+
     public dialogRef: MatDialogRef<EditDialog>,
     @Inject(MAT_DIALOG_DATA) public data: User
   ) {}
@@ -235,22 +246,7 @@ export class EditDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  successclick(){
-    const dialogRef = this.dialog.open(SuccessDialog, {
-      width: '250px', 
-      height:'300px'  ,               
-  })
+  successclick() {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {});
   }
 }
-
-@Component({
-  selector:'success-dialog',
-  templateUrl: '../dialog/dialog.component.html',
-})
-export class SuccessDialog{
-  constructor(
-    public dialogRef: MatDialogRef<SuccessDialog>,
-  ){}
-
-  }
-

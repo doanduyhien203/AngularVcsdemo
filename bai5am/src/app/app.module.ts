@@ -28,11 +28,11 @@ import {
   AccountComponent,
   DataDialog,
   EditDialog,
-  SuccessDialog,
+ 
 } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
@@ -40,8 +40,10 @@ import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MatSelectModule } from '@angular/material/select';
 import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
-import { DialogComponent } from './dialog/dialog.component';
+import {SuccessDialogComponent } from './noti-dialog/success-dialog/success-dialog.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { WarnDialogComponent } from './noti-dialog/warn-dialog/warn-dialog.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -85,8 +87,10 @@ import {MatRadioModule} from '@angular/material/radio';
     EditDialog,
     AddEditComponent,
     ListComponent,
-    SuccessDialog,
-    DialogComponent,
+    SuccessDialogComponent,
+    WarnDialogComponent,
+    ErrorDialogComponent
+
   ],
   bootstrap: [AppComponent],
   providers: [

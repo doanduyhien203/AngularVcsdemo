@@ -89,7 +89,7 @@
     </mat-form-field>
 
     <div mat-dialog-actions>
-      <button mat-flat-button color="primary" [disabled]="!form.valid">
+      <button mat-flat-button color="primary" [disabled]="!form.valid" (click)="successclick()" >
         Submit
       </button>
       &nbsp;

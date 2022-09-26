@@ -1,6 +1,6 @@
 <alert></alert>
 <p class="container-page">
-  <mat-toolbar style="position:fixed;">
+  <mat-toolbar style="position: fixed">
     <div class="tool-side">
       <button
         mat-icon-button
@@ -8,9 +8,9 @@
         aria-label="Example icon-button with menu icon"
         (click)="drawer.toggle()"
       >
-        <mat-icon>menu</mat-icon>
+        <mat-icon style="margin-bottom: 8px;">menu</mat-icon>
       </button>
-      <span class="side-title" style="margin-top: 2px">My App</span>
+      <span class="side-title" >My App</span>
       <div style="margin-left: 150px">
         <h1>Account List</h1>
       </div>
@@ -36,16 +36,16 @@
 
       <div class="side-item">
         <a style="font-size: 18px">
-          <span class="icon-container" >
-            <i class="material-icons"style="margin-right:10px;">mail</i>
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">mail</i>
           </span>
           Inbox
         </a>
       </div>
       <div class="side-item">
         <a style="font-size: 18px">
-          <span class="icon-container" >
-            <i class="material-icons" style="margin-right:10px;">send</i>
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">send</i>
           </span>
           Outbox
         </a>
@@ -53,7 +53,7 @@
       <div class="side-item">
         <a style="font-size: 18px">
           <span class="icon-container">
-            <i class="material-icons"style="margin-right:10px;">favorite</i>
+            <i class="material-icons" style="margin-right: 10px">favorite</i>
           </span>
           Favorites
         </a>
@@ -61,7 +61,7 @@
       <div class="side-item" routerLink="/list">
         <a style="font-size: 18px">
           <span class="icon-container">
-            <i class="material-icons"style="margin-right:10px;">group</i>
+            <i class="material-icons" style="margin-right: 10px">group</i>
           </span>
           User List
         </a>
@@ -69,16 +69,16 @@
       <div class="side-item">
         <a style="font-size: 18px">
           <span class="icon-container">
-            <i class="material-icons"style="margin-right:10px;">archive</i>
+            <i class="material-icons" style="margin-right: 10px">archive</i>
           </span>
           Archive
         </a>
       </div>
       <hr class="line" />
       <div class="side-item">
-        <a style="font-size: 18px"> 
+        <a style="font-size: 18px">
           <span class="icon-container">
-            <i class="material-icons"style="margin-right:10px;">delete</i>
+            <i class="material-icons" style="margin-right: 10px">delete</i>
           </span>
           Trash
         </a>
@@ -86,7 +86,7 @@
       <div class="side-item">
         <a style="font-size: 18px">
           <span class="icon-container">
-            <i class="material-icons"style="margin-right:10px;">report</i>
+            <i class="material-icons" style="margin-right: 10px">report</i>
           </span>
           Report
         </a>
@@ -96,7 +96,7 @@
     </div>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content" >
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

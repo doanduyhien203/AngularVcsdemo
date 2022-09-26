@@ -190,7 +190,7 @@
         <mat-menu #menu="matMenu" class="mat-menu">
           <button
             mat-menu-item
-            style="padding-top: 15px"
+            style="padding-top: 10px"
             (click)="editUser(element)"
           >
             Edit
@@ -199,6 +199,7 @@
             mat-menu-item
             style="padding-bottom: 15px"
             (click)="removeAt(idx)"
+            
           >
             Delete
           </button>
@@ -214,7 +215,7 @@
     </tr>
   </table>
   <mat-paginator
-    [pageSizeOptions]="[3,10, 25, 100]"
+    [pageSizeOptions]="[10, 25, 100]"
     aria-label="Select page of users"
   ></mat-paginator>
 </div>

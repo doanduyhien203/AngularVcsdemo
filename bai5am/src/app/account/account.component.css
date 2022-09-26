@@ -4,8 +4,9 @@ table {
 
 .mat-elevation-z8 {
 
+  flex-direction: column;
   min-width: 1200px;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 .mat-header-cell {
   text-transform: uppercase;
@@ -175,7 +176,7 @@ th {
   justify-content: center;
   flex-direction: column;
   width: 90px;
-  height: 90px !important;
+  height: 100px !important;
   overflow: hidden !important;
 }
 .badge  {
@@ -194,7 +195,6 @@ th {
 }
 
 .filter__form{
-   
   float: right;
   margin-top: -57px;
   margin-right: 25px;

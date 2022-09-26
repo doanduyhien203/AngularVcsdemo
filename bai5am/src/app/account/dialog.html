@@ -72,7 +72,7 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-flat-button [mat-dialog-close]="data.firstname" cdkFocusInitial>
+    <button mat-flat-button [mat-dialog-close]="false" cdkFocusInitial (click)="successclick()">
       Update
     </button>
   </div>
