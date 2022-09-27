@@ -4,6 +4,7 @@ import { AccountComponent } from './account/account.component';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.component';
 import { RegisterComponent } from './register/register.component';
 import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
@@ -18,14 +19,12 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
+ 
   {
     path: 'list',
     component: ListComponent,
   },
-  {
-    path: 'add',
-    component: AddEditComponent,
-  },
+  
   {
     path: 'list/add',
     component: AddEditComponent,

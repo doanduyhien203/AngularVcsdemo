@@ -43,7 +43,7 @@ import { ListComponent } from './users/list.component';
 import {SuccessDialogComponent } from './noti-dialog/success-dialog/success-dialog.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { WarnDialogComponent } from './noti-dialog/warn-dialog/warn-dialog.component';
-import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -63,14 +63,14 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MatMenuModule,
     MatToolbarModule,
     MatSortModule,
-    MatGridListModule,
+  
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
     DialogModule,
     MatDialogModule,
     MatIconModule,
-    MatRadioModule,
+  
     MatSidenavModule,
     AppRoutingModule,
   ],
@@ -89,7 +89,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     ListComponent,
     SuccessDialogComponent,
     WarnDialogComponent,
-    ErrorDialogComponent
+
 
   ],
   bootstrap: [AppComponent],

@@ -22,7 +22,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AccountService } from '../_service/account.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
-import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../noti-dialog/error-dialog/error-dialog.component';
+import { WarnDialogComponent } from '../noti-dialog/warn-dialog/warn-dialog.component';
 
 @Component({
   selector: 'account-table',
@@ -102,7 +103,7 @@ export class AccountComponent implements AfterViewInit {
   }
   */
   removeAt(index: number) {
-    const dialogRef = this.dialog.open(ErrorDialogComponent, {});
+    const dialogRef = this.dialog.open(WarnDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
       const data = this.dataSource.data;
@@ -122,8 +123,9 @@ export class AccountComponent implements AfterViewInit {
   }
 
   removeSelectedRows() {
-    const deleteItems = confirm('Are you sure you want to delete ?');
-    if (deleteItems) {
+    const dialogRef = this.dialog.open(WarnDialogComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
       this.selection.selected.forEach((item) => {
         let index: number = this.data.findIndex((d) => d === item);
         console.log(this.data.findIndex((d) => d === item));
@@ -134,7 +136,8 @@ export class AccountComponent implements AfterViewInit {
       });
       this.selection = new SelectionModel<User>(true, []);
     }
-  }
+  } );
+}
 
   masterToggle() {
     this.isAllSelected()
