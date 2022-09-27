@@ -33,10 +33,11 @@ const validateMatchedControlsValue = (
 export class AddEditComponent implements OnInit {
     form: FormGroup;
     id: string;
+
     isAddMode : boolean ;
     loading = false;
     submitted = false;
-    confirm : string;
+    confirmPass : string;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -47,7 +48,7 @@ export class AddEditComponent implements OnInit {
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
-        
+        this.confirmPass= this.route.snapshot.params['confirmPassword']
         this.isAddMode = !this.id;
   
         // password not required in edit mode
@@ -62,18 +63,20 @@ export class AddEditComponent implements OnInit {
            
             oldpass:['',Validators.required],
             password: ['', passwordValidators],
-        }
-       // ,{ validators: validateMatchedControlsValue('oldpass', 'confirm')}
+            confirmPass : this.confirmPass,
+             
+        },
+        {validators: validateMatchedControlsValue('oldpass', 'confirmPass')}
           
         );
-
+1
         if (!this.isAddMode) {
             this.loginService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => {   
                     this.f['email'].setValue(x.email);  
                     this.f['username'].setValue(x.username);
-                    this.confirm=x.confirmPassword;
+                    this.f['confirmPass'].setValue(x.confirmPassword);
                 });
         }
     }
