@@ -63,14 +63,14 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
     MatMenuModule,
     MatToolbarModule,
     MatSortModule,
-  
+    MatGridListModule,
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
     DialogModule,
     MatDialogModule,
     MatIconModule,
-  
+    MatRadioModule,
     MatSidenavModule,
     AppRoutingModule,
   ],
@@ -89,7 +89,7 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
     ListComponent,
     SuccessDialogComponent,
     WarnDialogComponent,
-
+    ErrorDialogComponent
 
   ],
   bootstrap: [AppComponent],

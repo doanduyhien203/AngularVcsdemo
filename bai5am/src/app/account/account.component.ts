@@ -60,8 +60,8 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    this.formSubscribe();
-    this.getFormsValue();
+    //this.formSubscribe();
+    //this.getFormsValue();
   }
   addData() {
     const dialogConfig = new MatDialogConfig();
@@ -89,19 +89,7 @@ export class AccountComponent implements AfterViewInit {
   onNoClick(): void {
     this.datadialogRef.close();
   }
-/*
-  removeAt(index: number) {
-    const deleteItem = confirm('Are you sure you want to delete ?');
-    if (deleteItem) {
-      const data = this.dataSource.data;
-      data.splice(
-        this.paginator.pageIndex * this.paginator.pageSize + index,
-        1
-      );
-      this.dataSource.data = data;
-    }
-  }
-  */
+
   removeAt(index: number) {
     const dialogRef = this.dialog.open(WarnDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => {
@@ -121,8 +109,8 @@ export class AccountComponent implements AfterViewInit {
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-
   removeSelectedRows() {
+    if(this.selection.selected.length>0){
     const dialogRef = this.dialog.open(WarnDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
@@ -136,7 +124,7 @@ export class AccountComponent implements AfterViewInit {
       });
       this.selection = new SelectionModel<User>(true, []);
     }
-  } );
+  } );}
 }
 
   masterToggle() {
