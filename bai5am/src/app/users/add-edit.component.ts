@@ -123,7 +123,7 @@ export class AddEditComponent implements OnInit {
             .subscribe({
                 next: (_data) => {
                     this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['../login', { relativeTo: this.route }]);
+                    setTimeout(() =>this.router.navigate(['/home'], { relativeTo: this.route }),2000);
                 },
                 error: (error) => {
                     this.alertService.error(error);

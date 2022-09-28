@@ -113,6 +113,9 @@
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
+.mat-error{
+  font-size:12px ;
+}
 @media (max-width: 992px) {
   .wrap-login100 {
     padding: 177px 90px 33px 85px;

@@ -11,8 +11,10 @@ import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserLoginService } from '../_service/userlogin.service';
 import { AlertService } from '../_service/alert.service';
-
-const PASSWORD_PATTERN = /^[a-z0-9!@#$%^&*]{4,32}$/;
+import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+const PASSWORD_PATTERN =/^(?=.*[0-9]+)[a-zA-Z0-9!@#$%^&*]{4,32}$/;
+//const PASSWORD_PATTERN =/^(?=.*[!@#$%^&*]+)[a-zA-Z0-9!@#$%^&*]{4,32}$/;
 const validateMatchedControlsValue = (
   firstControlName: string,
   secondControlName: string
@@ -26,7 +28,7 @@ const validateMatchedControlsValue = (
     ) as AbstractControl;
     return firstControlValue === secondControlValue
       ? null
-      : {
+      : {  notSame: true,
           valueNotMatch: {
             firstControlValue,
             secondControlValue,
@@ -41,13 +43,14 @@ const validateMatchedControlsValue = (
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-[x: string]: any;
+  [x: string]: any;
   showPassword1: boolean = false;
   showPassword: boolean = false;
   loading = false;
   submitted = false;
 
   constructor(
+
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -64,7 +67,7 @@ export class RegisterComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(4),
-          Validators.pattern(/^[a0-z9]{4,32}$/i),
+          Validators.pattern(/^[a-zA-Z0-9]{4,32}$/),
         ]),
         
       ],
@@ -88,8 +91,6 @@ export class RegisterComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(4),
-          Validators.pattern(PASSWORD_PATTERN),
         ]),
       ],
     },
@@ -141,7 +142,8 @@ export class RegisterComponent implements OnInit {
           this.alertService.success('Registration successful', {
             keepAfterRouteChange: true,
           });
-          this.router.navigate(['/login'], { relativeTo: this.route });
+          setTimeout(() =>this.router.navigate(['..'], { relativeTo: this.route }),2000);
+         
         },
         error: (error) => {
           this.alertService.error(error);
@@ -155,4 +157,5 @@ export class RegisterComponent implements OnInit {
   public togglePasswordVisibility1(): void {
     this.showPassword1 = !this.showPassword1;
   }
+  
 }

@@ -1,4 +1,4 @@
-<alert></alert>
+
   <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
@@ -19,16 +19,17 @@
               placeholder="Username"
               formControlName="username"
              
-              [ngClass]="{ 'i0s-invalid': submitted && f['username'].errors }"
+              [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
             />
-            <div
-              *ngIf="submitted && f['username'].errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f['username'].errors['required']">
-                Username is required
-              </div>
+            <mat-error
+            style="font-size: 12px"
+            *ngIf="f['username'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['username'].errors['required']">
+              UserName is required!
             </div>
+          </mat-error>
           </mat-form-field>
         </div>
         <div class="wrap-input100 form-group">
@@ -42,14 +43,12 @@
               [type]="showPassword ? 'text' : 'password'"
               [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
             />
-            <div
-              *ngIf="submitted && f['password.errors']"
-              class="invalid-feedback"
-            >
+            <mat-error *ngIf="f['password'].errors" class="invalid-feedback">
               <div *ngIf="f['password'].errors['required']">
                 Password is required
               </div>
-            </div>
+              </mat-error>
+        
             <mat-icon matSuffix (click)="togglePasswordVisibility()">
               {{ showPassword ? "visibility_off" : "visibility" }}
             </mat-icon>
