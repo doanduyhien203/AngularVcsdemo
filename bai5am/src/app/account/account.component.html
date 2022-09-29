@@ -1,4 +1,5 @@
 <div class="mat-elevation-z8">
+  <!--
   <mat-form-field appearance="standard" class="filter">
     <mat-label>
       <mat-icon style="transform: scale(1.25); margin-right: 10px"
@@ -12,7 +13,7 @@
       #input
     />
   </mat-form-field>
-  
+ --> 
   <button
     mat-raised-button
     style="float: right; margin-right: 30px;margin-top: 25px;"
@@ -29,9 +30,19 @@
   >
     Remove Selected
   </button>
+   
   
   <form [formGroup]="filterForm">
     <div mat-dialog-content class="filter__form" >
+      <div class="form-group">
+        <mat-form-field
+          class="example-full-width"
+          
+        >
+        
+          <input matInput formControlName= "firstname" formControlName= "lastname" formControlName="address"  placeholder="Enter name" />
+        </mat-form-field>
+        </div>
       <div class="form-group">
         <mat-form-field>
           <mat-label>Gender</mat-label>
@@ -208,10 +219,11 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+   
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">
+     <!-- <td class="mat-cell" colspan="4">
         No data matching the filter "{{ input.value }}"
-      </td>
+      </td>-->
     </tr>
   </table>
   <mat-paginator
