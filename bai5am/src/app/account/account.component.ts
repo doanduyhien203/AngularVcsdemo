@@ -60,8 +60,8 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    //this.formSubscribe();
-    //this.getFormsValue();
+    this.formSubscribe();
+    this.getFormsValue();
   }
   addData() {
     const dialogConfig = new MatDialogConfig();
@@ -156,38 +156,82 @@ export class AccountComponent implements AfterViewInit {
   }
 
   genderList: string[] = ['M', 'F'];
-  filterValues1 = {
+  filterValues = {
     gender: [],
+    firstname: '',
+    lastname:'',
+    address:''
   };
   filterForm = new FormGroup({
     gender: new FormControl(),
+    firstname: new FormControl(),
+    lastname: new FormControl(),
+    address: new FormControl(),
   });
+  get firstname() {
+    return this.filterForm.get('firstName');
+  }
+  get lastname() {
+    return this.filterForm.get('lastName');
+  }
+  get address() {
+    return this.filterForm.get('address');
+  }
   get gender() {
     return this.filterForm.get('gender');
   }
   formSubscribe() {
-    this.gender.valueChanges.subscribe((positionValue) => {
-      this.filterValues1['gender'] = positionValue;
-      this.dataSource.filter = JSON.stringify(this.filterValues1);
+    this.gender.valueChanges.subscribe((genderValue) => {
+      this.filterValues['gender'] = genderValue;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.firstname.valueChanges.subscribe((firstnameValue) => {
+      this.filterValues['firstName'] = firstnameValue;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.lastname.valueChanges.subscribe((lastnameValue) => {
+      this.filterValues['name'] = lastnameValue;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.address.valueChanges.subscribe((addressValue) => {
+      this.filterValues['name'] = addressValue;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
     });
   }
   getFormsValue() {
-    this.dataSource.filterPredicate = (data, filter1: string): boolean => {
-      let searchString = JSON.parse(filter1);
-      let isPositionAvailable = false;
+    this.dataSource.filterPredicate = (data, filter: string): boolean => {
+      let searchString = JSON.parse(filter);
+      let isGenderAvailable = false;
       if (searchString.gender.length) {
         for (const d of searchString.gender) {
           if (data.gender.trim() === d) {
-            isPositionAvailable = true;
+            isGenderAvailable = true;
           }
         }
       } else {
-        isPositionAvailable = true;
+        isGenderAvailable = true;
       }
-      const resultValue = isPositionAvailable;
+      const resultValue = isGenderAvailable &&
+      data.firstname
+        .toString()
+        .trim()
+        .toLowerCase()
+        .indexOf(searchString.firstname.toLowerCase()) !== -1 &&
+      data.lastname
+        .toString()
+        .trim()
+        .toLowerCase()
+        .indexOf(searchString.lastname.toLowerCase()) !== -1 &&
+        data.address
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.address.toLowerCase()) !== -1;
 
-      return resultValue;
+
+    return resultValue;
     };
+   // this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 }
 
