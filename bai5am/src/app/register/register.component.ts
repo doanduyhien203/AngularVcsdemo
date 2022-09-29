@@ -6,45 +6,15 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { map, Observable, Subject, timer, tap, take, startWith } from 'rxjs';
-import { ApiService } from '../_service/api.service';
-import { filter, switchMap } from 'rxjs/operators';
+
+import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../_service/alert.service';
 import { UserLoginService } from '../_service/userlogin.service';
-
-const PASSWORD_PATTERN = /^(?=.*[!@#$%^&*]+)[a-z0-9!@#$%^&*]{6,32}$/;
-const EMAIL_PATTERN = /^(?=.*[@]+)[a-z0-9!@#$%^&*]{6,32}$/;
-
-const validateUsernameFromApi = (api: ApiService) => {
-  return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    return api.validateUsername(control.value).pipe(
-      map((isValid: boolean) => {
-        return isValid ? null : { usernameDuplicated: true };
-      })
-    );
-  };
-};
-
-const validateUsernameFromApiDebounce = (api: ApiService) => {
-  return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    return timer(300).pipe(
-      switchMap(() =>
-        api.validateUsername(control.value).pipe(
-          map((isValid) => {
-            if (isValid) {
-              return null;
-            }
-            return {
-              usernameDuplicated: true,
-            };
-          })
-        )
-      )
-    );
-  };
-};
-
+import { AlertService } from '../_service/alert.service';
+import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+const PASSWORD_PATTERN =/^(?=.*[0-9]+)[a-zA-Z0-9!@#$%^&*]{4,32}$/;
+//const PASSWORD_PATTERN =/^(?=.*[!@#$%^&*]+)[a-zA-Z0-9!@#$%^&*]{4,32}$/;
 const validateMatchedControlsValue = (
   firstControlName: string,
   secondControlName: string
@@ -58,7 +28,7 @@ const validateMatchedControlsValue = (
     ) as AbstractControl;
     return firstControlValue === secondControlValue
       ? null
-      : {
+      : {  notSame: true,
           valueNotMatch: {
             firstControlValue,
             secondControlValue,
@@ -68,39 +38,52 @@ const validateMatchedControlsValue = (
 };
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-regis-user',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  formSubmit$ = new Subject<boolean | null>();
-
+  [x: string]: any;
+  showPassword1: boolean = false;
   showPassword: boolean = false;
+  loading = false;
+  submitted = false;
 
+  constructor(
+
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private loginService: UserLoginService,
+   private alertService: AlertService
+  ) {
+    // redirect to home if already logged in
+    
+  }
   registerForm = this.fb.group(
     {
       username: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(/^[a-z]{6,32}$/i),
+          Validators.minLength(4),
+          Validators.pattern(/^[a-zA-Z0-9]{4,32}$/),
         ]),
-        validateUsernameFromApiDebounce(this.api),
+        
       ],
       email: [
         '',
         Validators.compose([
+          Validators.email,
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(EMAIL_PATTERN),
+          Validators.minLength(4),
         ]),
       ],
       password: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
+          Validators.minLength(4),
           Validators.pattern(PASSWORD_PATTERN),
         ]),
       ],
@@ -108,8 +91,6 @@ export class RegisterComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(PASSWORD_PATTERN),
         ]),
       ],
     },
@@ -117,15 +98,12 @@ export class RegisterComponent implements OnInit {
       validators: validateMatchedControlsValue('password', 'confirmPassword'),
     }
   );
-
-  constructor(private fb: FormBuilder, private api: ApiService) {}
-
   get f() {
     return this.registerForm.controls;
   }
 
   ngOnInit(): void {
-    this.formSubmit$
+    /*    this.formSubmit$
       .pipe(
         tap(() => this.registerForm.markAsDirty()),
         switchMap(() =>
@@ -141,6 +119,43 @@ export class RegisterComponent implements OnInit {
         })
       )
       .subscribe();
+      */
   }
-  submitForm(): void {}
+  // submitForm(): void {}
+  onSubmit() {
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return ;
+    }
+
+    this.loading = true;
+    this.loginService
+      .register(this.registerForm.value)
+      .pipe(first())
+      .subscribe({
+        next: (_data) => {
+          this.alertService.success('Registration successful', {
+            keepAfterRouteChange: true,
+          });
+          setTimeout(() =>this.router.navigate(['..'], { relativeTo: this.route }),2000);
+         
+        },
+        error: (error) => {
+          this.alertService.error(error);
+          this.loading = false;
+        }}
+      );
+  }
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+  public togglePasswordVisibility1(): void {
+    this.showPassword1 = !this.showPassword1;
+  }
+  
 }

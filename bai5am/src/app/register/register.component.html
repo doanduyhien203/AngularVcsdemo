@@ -1,59 +1,118 @@
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
-      <div class="login100-pic js-tilt"></div>
-        <form class="login100-form validate-form" [formGroup]="registerForm" autocomplete="off" (ngSubmit)="formSubmit$.next(true)">
-          <title class="login100-form-title">Register</title>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              <mat-label>Username</mat-label>
-              <input matInput placeholder="Username" formControlName="username" />
-              
-            </mat-form-field>
-       
-            
-            <!--    <pre>{{ registerForm.get("username")?.errors }}</pre>-->
-          </div>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="email" />
-            </mat-form-field>
-            <!--    <pre>{{ registerForm.get("username")?.errors | json }}</pre>-->
-          </div>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              
-              <mat-label>Password</mat-label>  
-              <input type="password" matInput placeholder="Password" formControlName="password" [type]="showPassword ? 'text' : 'password'"
-              />
-              <!--
-              <i class="far fa-eye eye-show" 
-              (click)="showPassword = !showPassword"
-              [class.hide]="showPassword"></i>
-              <i alt="hide" class="far fa-eye-slash eye-hide" 
-              (click)="showPassword = !showPassword"
-              [class.hide]="!showPassword"></i>
-          -->
-            </mat-form-field>
-          
-            <!--     <pre>{{ registerForm.get("password")?.errors | json }}</pre>-->
-          </div>
-          <div class="wrap-input100">
-            <mat-form-field appearance="outline">
-              <mat-label>Confirm Password</mat-label>
-              <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword" />
-            </mat-form-field>
-            <!--    <pre>{{ registerForm.get("confirmPassword")?.errors | json }}</pre>-->
-          </div>
-          <div class="container-login100-form-btn">
-            <button class="login100-form-btn" mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" routerLink="/sign-in-rf">
-              Register
-            </button>
-          </div>
-          <pre>{{ registerForm.value | json }}</pre>
-          <pre> {{ registerForm.errors | json }} </pre>
-        </form>
+      <div class="login100-pic js-tilt">
+        <img
+          src="https://colorlib.com/etc/lf/Login_v1/images/img-01.png"
+          alt="IMG"
+        />
       </div>
+      <form
+        class="login100-form validate-form"
+        [formGroup]="registerForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit()"
+      >
+        <title class="login100-form-title">Register</title>
+        <div class="wrap-input100 form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              placeholder="Username"
+              formControlName="username"
+              [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+            />
+            <mat-error
+              style="font-size: 12px"
+              *ngIf="f['username'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['username'].errors['required']">
+                UserName is required!
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="Email"
+              formControlName="email"
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+            />
+            <mat-error *ngIf="f['email'].errors" class="invalid-feedback"
+              ><div *ngIf="f['email'].errors['required']">
+                Email is required!
+              </div>
+              <div *ngIf="submitted && f['email'].errors['email']">
+                Please enter a valid email
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              [type]="showPassword ? 'text' : 'password'"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            />
+            <mat-error *ngIf="f['password'].errors" class="invalid-feedback">
+              <div *ngIf="f['password'].errors['required']">
+                Password is required
+              </div>
+              <div *ngIf="f['password'].errors['pattern']">
+                Password requires a number
+              </div>
+            </mat-error>
+
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{ showPassword ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input
+              type="password"
+              matInput
+              [type]="showPassword1 ? 'text' : 'password'"
+              placeholder="Confirm Password"
+              formControlName="confirmPassword"
+            />
+
+            <div
+              *ngIf="submitted && registerForm.hasError('notSame')"
+              style="font-size: 10px; color: red"
+            >
+              Passwords not match
+            </div>
+
+            <mat-icon matSuffix (click)="togglePasswordVisibility1()">
+              {{ showPassword1 ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="container-login100-form-btn">
+          <button
+            class="login100-form-btn"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            style="max-width: 250px"
+           
+          >
+            Register
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>

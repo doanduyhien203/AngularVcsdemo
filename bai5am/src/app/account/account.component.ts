@@ -1,14 +1,29 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { User } from '../_models/account';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { USERS } from './accounts';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import {MatDialog} from '@angular/material/dialog';
-
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { EditAccountComponent } from '../edit-account/edit-account.component';
+
+import { AccountService } from '../_service/account.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from '../noti-dialog/error-dialog/error-dialog.component';
+import { WarnDialogComponent } from '../noti-dialog/warn-dialog/warn-dialog.component';
 
 @Component({
   selector: 'account-table',
@@ -16,7 +31,7 @@ import { EditAccountComponent } from '../edit-account/edit-account.component';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements AfterViewInit {
-  displayedColumns = [
+  displayedColumns: string[] = [
     'select',
     'account_number',
     'balance',
@@ -34,59 +49,51 @@ export class AccountComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
+  @ViewChild(MatTable) table: MatTable<User>;
+
   constructor(
     public dialog: MatDialog,
-    ) {
-    
-      console.log(this.data);
-   }
-   openDialog() {
-    const dialogRef = this.dialog.open(EditAccountComponent, {restoreFocus: false});
-
-    // Manually restore focus to the menu trigger since the element that
-    // opens the dialog won't be in the DOM any more when the dialog closes.
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
+    private datadialogRef: MatDialogRef<DataDialog>
+  ) {}
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  } 
-
-  
-
-
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
   }
+  ngOnInit() {
+    //this.formSubscribe();
+    //this.getFormsValue();
+  }
+  addData() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '350px';
 
-  removeSelectedRows() {
-    const deleteItems = confirm('Are you sure you want to delete ?');
-    if (deleteItems){
-    this.selection.selected.forEach((item) => {
-      let index: number = this.data.findIndex((d) => d === item);
-      console.log(this.data.findIndex((d) => d === item));
-      this.dataSource.data.splice(index, 1);
-      this.dataSource = new MatTableDataSource<User>(this.dataSource.data);
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dataRef = this.dialog.open(DataDialog, dialogConfig);
+    dataRef.afterClosed().subscribe((result) => {
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     });
-    this.selection = new SelectionModel<User>(true, []);
-  }}
-
-  masterToggle() {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
-  /** The label for the checkbox on the passed row */
-  
+
+  user;
+  editUser(user) {
+    const dialogRef = this.dialog.open(EditDialog, {
+      width: '350px',
+      data: user,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.user = user;
+    });
+  }
+  onNoClick(): void {
+    this.datadialogRef.close();
+  }
+
   removeAt(index: number) {
-    const deleteItem = confirm('Are you sure you want to delete ?');
-    if (deleteItem) {
+    const dialogRef = this.dialog.open(WarnDialogComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
       const data = this.dataSource.data;
       data.splice(
         this.paginator.pageIndex * this.paginator.pageSize + index,
@@ -94,9 +101,46 @@ export class AccountComponent implements AfterViewInit {
       );
       this.dataSource.data = data;
     }
+  } );
+}
+  
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
+  removeSelectedRows() {
+    if(this.selection.selected.length>0){
+    const dialogRef = this.dialog.open(WarnDialogComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      this.selection.selected.forEach((item) => {
+        let index: number = this.data.findIndex((d) => d === item);
+        console.log(this.data.findIndex((d) => d === item));
+        this.dataSource.data.splice(index, 1);
+        this.dataSource = new MatTableDataSource<User>(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+      this.selection = new SelectionModel<User>(true, []);
+    }
+  } );}
+}
 
- 
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach((row) => this.selection.select(row));
+  }
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: User): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.account_number + 1
+    }`;
+  }
   filterText = '';
 
   applyFilter(event: Event) {
@@ -108,25 +152,92 @@ export class AccountComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
     this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-  }
-  
-  addColumn() {
-    const randomColumn = Math.floor(
-      Math.random() * this.displayedColumns.length
-    );
-    this.columnsToDisplay.push(this.displayedColumns[randomColumn]);
+    this.dataSource.sort = this.sort;
   }
 
-  removeColumn() {
-    if (this.columnsToDisplay.length) {
-      this.columnsToDisplay.pop();
-    }
+  genderList: string[] = ['M', 'F'];
+  filterValues1 = {
+    gender: [],
+  };
+  filterForm = new FormGroup({
+    gender: new FormControl(),
+  });
+  get gender() {
+    return this.filterForm.get('gender');
   }
- 
-  
+  formSubscribe() {
+    this.gender.valueChanges.subscribe((positionValue) => {
+      this.filterValues1['gender'] = positionValue;
+      this.dataSource.filter = JSON.stringify(this.filterValues1);
+    });
+  }
+  getFormsValue() {
+    this.dataSource.filterPredicate = (data, filter1: string): boolean => {
+      let searchString = JSON.parse(filter1);
+      let isPositionAvailable = false;
+      if (searchString.gender.length) {
+        for (const d of searchString.gender) {
+          if (data.gender.trim() === d) {
+            isPositionAvailable = true;
+          }
+        }
+      } else {
+        isPositionAvailable = true;
+      }
+      const resultValue = isPositionAvailable;
+
+      return resultValue;
+    };
+  }
 }
 
-  
+@Component({
+  selector: 'data-dialog',
+  templateUrl: './data-dialog.html',
+  styleUrls: ['./data-dialog.css'],
+})
+export class DataDialog implements OnInit {
+  dataSource = new MatTableDataSource<User>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<DataDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: User,
+    private dataService: AccountService
+  ) {}
 
+  onYesClick(): void {
+    this.dialogRef.close(false);
+  }
+  ngOnInit() {}
+  onSubmit(formData) {
+    let id = this.dataService.getAccount().length + 1;
+    formData.id = id;
+    this.dataService.addAccount(formData);
+    this.dialogRef.close(false);
+  }
+  successclick() {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {});
+  }
+}
 
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog.html',
+  styleUrls: ['./dialog.css'],
+})
+export class EditDialog {
+  constructor(
+    public dialog: MatDialog,
+
+    public dialogRef: MatDialogRef<EditDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: User
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  successclick() {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {});
+  }
+}

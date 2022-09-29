@@ -1,13 +1,12 @@
 table {
   width: 100%;
-
-
-
 }
-.mat-elevation-z8{
-  margin-top: 50px;
-  width: 1500px;
 
+.mat-elevation-z8 {
+
+  flex-direction: column;
+  min-width: 1200px;
+  margin-top: 40px;
 }
 .mat-header-cell {
   text-transform: uppercase;
@@ -90,8 +89,8 @@ table {
 .mat-column-gender {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 5% !important;
-  width: 5% !important;
+  flex: 0 0 8% !important;
+  width: 8% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -177,6 +176,27 @@ th {
   justify-content: center;
   flex-direction: column;
   width: 90px;
-  height: 90px !important;
+  height: 100px !important;
   overflow: hidden !important;
+}
+.badge  {
+  font-size: 13px;
+  
+  background-color:#E8FFF3;
+  color: #50CD89;
+  
+}
+.badge.red{
+  font-size: 13px;
+  
+  background-color:#FFF5F8;
+  color: #F1416C;
+  
+}
+
+.filter__form{
+  float: right;
+  margin-top: -57px;
+  margin-right: 25px;
+  width: 110px;
 }

@@ -1,5 +1,6 @@
+<alert></alert>
 <p class="container-page">
-  <mat-toolbar>
+  <mat-toolbar style="position: fixed">
     <div class="tool-side">
       <button
         mat-icon-button
@@ -7,25 +8,95 @@
         aria-label="Example icon-button with menu icon"
         (click)="drawer.toggle()"
       >
-        <mat-icon>menu</mat-icon>
+        <mat-icon style="margin-bottom: 8px;">menu</mat-icon>
       </button>
-      <span class="side-title">My App</span>
+      <span class="side-title" >My App</span>
       <div style="margin-left: 150px">
         <h1>Account List</h1>
       </div>
-      <button mat-icon-button class="log-out" routerLink="../sign-in-rf"
-      color="black">
-        <mat-icon>logout</mat-icon>
+      <button
+        mat-icon-button
+        class="user-edit"
+        routerLink="../edit/{{ user.id }}"
+      >
+        <mat-icon>manage_accounts</mat-icon>
+      </button>
+      <button mat-icon-button class="log-out" routerLink="../login">
+        <mat-icon color="#ba4c00">logout</mat-icon>
       </button>
     </div>
   </mat-toolbar>
 </p>
 <mat-drawer-container class="example-container">
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <span>Auto-resizing sidenav</span>
+    <div ng-icon-sidebar>
+      <h1>Hi {{ user.username }}</h1>
+      <hr class="line" />
+      <!-- Your content goes here, inside the sidebar's tag. This sample content exists for demonstration purposes. -->
+
+      <div class="side-item">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">mail</i>
+          </span>
+          Inbox
+        </a>
+      </div>
+      <div class="side-item">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">send</i>
+          </span>
+          Outbox
+        </a>
+      </div>
+      <div class="side-item">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">favorite</i>
+          </span>
+          Favorites
+        </a>
+      </div>
+      <div class="side-item" routerLink="/list">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">group</i>
+          </span>
+          User List
+        </a>
+      </div>
+      <div class="side-item">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">archive</i>
+          </span>
+          Archive
+        </a>
+      </div>
+      <hr class="line" />
+      <div class="side-item">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">delete</i>
+          </span>
+          Trash
+        </a>
+      </div>
+      <div class="side-item">
+        <a style="font-size: 18px">
+          <span class="icon-container">
+            <i class="material-icons" style="margin-right: 10px">report</i>
+          </span>
+          Report
+        </a>
+      </div>
+      <hr class="line" />
+      <!-- End of sample content for demonstration purposes. -->
+    </div>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content" >
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

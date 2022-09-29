@@ -1,65 +1,90 @@
 .mat-toolbar {
-  height: 100%;
+  background-color: #eef1ff;
+  padding: 0px;
+  margin: 0cm;
+  border-bottom: 0.5px solid #f5e8e8;
+
+  position: sticky;
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000;
+}
+.side-title {
+  margin-left: 30px;
 }
 
-.example-sidenav-content {
-
-  height: 100%;
+.tool-side {
+  color: #354259;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 15px;
+  width: 250px;
+  height: 100%;
+  background-color: #d2daff;
+  cursor: pointer;
 }
 
-.example-sidenav {
-  color: #B6B9C8;
-  padding: 20px;
-  height: 100%;
+.example-container {
+  min-height: 100%;
 }
-.example-sidenav:hover span{
-  color: #FFFFFF;
+.example-sidenav {
+  color: #b6b9c8;
+  padding: 30px;
+}
+.example-sidenav-content {
+  justify-content: center;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  min-height: 100%;
+}
+
+.mat-drawer {
+  color: #354259;
+  width: 250px;
+  height: 100%;
+  background-color: #dce0f5;
+  position: fixed;
+  margin-top: 64px;
+}
+
+.side-title:hover span {
+  color: #ba4c00;
+}
+
+.container-page {
+  height: 64px;
+  margin: 0px;
 }
 
 .log-out {
   position: absolute;
-  right: 20px;
+  right: 50px;
 }
-
-.mat-drawer {
-  width: 240px;
+.user-edit {
+  position: absolute;
+  right: 120px;
+}
+.user-edit:hover {
+  color: #ba4c00;
+}
+.log-out:hover {
+  color: #ba4c00;
+}
+.ng-icon-sidebar {
+  left: 0;
   height: 100%;
-  background-color: #1E1E2D;
-
-}
-
-.mat-toolbar {
-  background-color: aliceblue;
-  padding: 0px;
-  margin: 0cm;
-  border-bottom: 0.5px solid #f5e8e8 ;
-
-
-
-}
-
-.tool-side {
-  color: #5E6278;
+  overflow-x: hidden;
+  overflow-y: auto;
+  top: 0;
+  transition: 0.25s;
+  z-index: 99999999;
   display: flex;
-  padding: 15px;
-  width: 240px;
-  height: 100%;
-  background-color: #181C32;
-  border-bottom: 1px solid rgb(42, 40, 80);
+  flex-direction: column;
 }
-.side-title{
-  color: #FFFFFF;
-  margin-left: 25px;
 
+.side-item {
+  margin-bottom: 25px;
 }
-.tool-side:hover span{
-  color: aqua;
-}
-.container-page {
-  
-  height: 70px;
-  margin: 0px;
+.side-item :hover {
+  cursor: pointer;
 }
