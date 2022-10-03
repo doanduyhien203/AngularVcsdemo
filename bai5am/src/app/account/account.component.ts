@@ -92,40 +92,43 @@ export class AccountComponent implements AfterViewInit {
 
   removeAt(index: number) {
     const dialogRef = this.dialog.open(WarnDialogComponent, {});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-      const data = this.dataSource.data;
-      data.splice(
-        this.paginator.pageIndex * this.paginator.pageSize + index,
-        1
-      );
-      this.dataSource.data = data;
-    }
-  } );
-}
-  
+        const data = this.dataSource.data;
+        data.splice(
+          this.paginator.pageIndex * this.paginator.pageSize + index,
+          1
+        );
+        this.dataSource.data = data;
+      }
+    });
+  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
   removeSelectedRows() {
-    if(this.selection.selected.length>0){
-    const dialogRef = this.dialog.open(WarnDialogComponent, {});
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-      this.selection.selected.forEach((item) => {
-        let index: number = this.data.findIndex((d) => d === item);
-        console.log(this.data.findIndex((d) => d === item));
-        this.dataSource.data.splice(index, 1);
-        this.dataSource = new MatTableDataSource<User>(this.dataSource.data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    if (this.selection.selected.length > 0) {
+      const dialogRef = this.dialog.open(WarnDialogComponent, {});
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
+          this.selection.selected.forEach((item) => {
+            let index: number = this.data.findIndex((d) => d === item);
+            console.log(this.data.findIndex((d) => d === item));
+            this.dataSource.data.splice(index, 1);
+            this.dataSource = new MatTableDataSource<User>(
+              this.dataSource.data
+            );
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          });
+          this.selection = new SelectionModel<User>(true, []);
+        }
       });
-      this.selection = new SelectionModel<User>(true, []);
     }
-  } );}
-}
+  }
 
   masterToggle() {
     this.isAllSelected()
@@ -141,6 +144,7 @@ export class AccountComponent implements AfterViewInit {
       row.account_number + 1
     }`;
   }
+/*
   filterText = '';
 
   applyFilter(event: Event) {
@@ -154,13 +158,13 @@ export class AccountComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+*/
   genderList: string[] = ['M', 'F'];
   filterValues = {
     gender: [],
     firstname: '',
-    lastname:'',
-    address:''
+    lastname: '',
+    address: '',
   };
   filterForm = new FormGroup({
     gender: new FormControl(),
@@ -168,39 +172,46 @@ export class AccountComponent implements AfterViewInit {
     lastname: new FormControl(),
     address: new FormControl(),
   });
+  get gender() {
+    return this.filterForm.get('gender');
+  }
   get firstname() {
-    return this.filterForm.get('firstName');
+    return this.filterForm.get('firstname');
   }
   get lastname() {
-    return this.filterForm.get('lastName');
+    return this.filterForm.get('lastname');
   }
   get address() {
     return this.filterForm.get('address');
   }
-  get gender() {
-    return this.filterForm.get('gender');
-  }
+  searchTerm;
+  
   formSubscribe() {
     this.gender.valueChanges.subscribe((genderValue) => {
       this.filterValues['gender'] = genderValue;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.firstname.valueChanges.subscribe((firstnameValue) => {
-      this.filterValues['firstName'] = firstnameValue;
+      this.filterValues['firstname'] = firstnameValue;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.lastname.valueChanges.subscribe((lastnameValue) => {
-      this.filterValues['name'] = lastnameValue;
+      this.filterValues['lastname'] = lastnameValue;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.address.valueChanges.subscribe((addressValue) => {
-      this.filterValues['name'] = addressValue;
+      this.filterValues['address'] = addressValue;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
   }
+  updateSearch(e) {
+    this.searchTerm = e.target.value;
+  }
+  searchString;
   getFormsValue() {
     this.dataSource.filterPredicate = (data, filter: string): boolean => {
       let searchString = JSON.parse(filter);
+      
       let isGenderAvailable = false;
       if (searchString.gender.length) {
         for (const d of searchString.gender) {
@@ -211,27 +222,30 @@ export class AccountComponent implements AfterViewInit {
       } else {
         isGenderAvailable = true;
       }
-      const resultValue = isGenderAvailable &&
-      data.firstname
-        .toString()
-        .trim()
-        .toLowerCase()
-        .indexOf(searchString.firstname.toLowerCase()) !== -1 &&
-      data.lastname
-        .toString()
-        .trim()
-        .toLowerCase()
-        .indexOf(searchString.lastname.toLowerCase()) !== -1 &&
-        data.address
+      const resultValue =
+        isGenderAvailable &&
+        (
+          data.firstname
           .toString()
           .trim()
           .toLowerCase()
-          .indexOf(searchString.address.toLowerCase()) !== -1;
-
-
-    return resultValue;
+          .includes(searchString.firstname) ||
+          data.lastname
+            .toString()
+            .trim()
+            .toLowerCase()
+            .includes(searchString.firstname) ||
+          data.address
+            .toString()
+            .trim()
+            .toLowerCase()
+            .includes(searchString.firstname)
+        )
+        
+      return resultValue;
     };
-   // this.dataSource.filter = JSON.stringify(this.filterValues);
+
+      this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 }
 

@@ -14,15 +14,16 @@ export class HighlightSearchPipe implements PipeTransform {
         '(?![^&;]+;)(?!<[^<>]*)(' + search + ')(?![^<>]*>)(?![^&;]+;)',
         'gi'
       ),
-      '<strong  class="your-class" >$1</strong>'
+      '<span style="background-color:yellow"><strong style="background-color:yellow">$1</strong></span>'
       
         
     );
   
   }
 }
+
+
 /*
- 
   constructor(private _sanitizer: DomSanitizer) { }
 
   transform(list: any, searchText: string): any {
@@ -38,4 +39,4 @@ export class HighlightSearchPipe implements PipeTransform {
   }
   
 }
- */
+*/
