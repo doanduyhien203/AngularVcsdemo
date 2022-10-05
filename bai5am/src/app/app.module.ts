@@ -44,6 +44,7 @@ import {SuccessDialogComponent } from './noti-dialog/success-dialog/success-dial
 import {MatRadioModule} from '@angular/material/radio';
 import { WarnDialogComponent } from './noti-dialog/warn-dialog/warn-dialog.component';
 import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
     MatRadioModule,
     MatSidenavModule,
     AppRoutingModule,
+    NgxPaginationModule,
   ],
 
   declarations: [

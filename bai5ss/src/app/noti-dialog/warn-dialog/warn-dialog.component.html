@@ -1,0 +1,25 @@
+<div class="dialog">
+	<div class="f-modal-alert">
+	  <div class="f-modal-icon f-modal-warning scaleWarning">
+		<span class="f-modal-body pulseWarningIns"></span>
+		<span class="f-modal-dot pulseWarningIns"></span>
+	  </div>
+	</div>
+	<h3 style="margin-left:43px;">Do you want to delete?</h3>
+  
+  <div mat-dialog-actions>
+	<button
+	  mat-raised-button
+	  color="warn"
+	  [mat-dialog-close]="true"
+	  style="margin-left:25px;margin-bottom: 20px;"
+	>
+	  Yes,delete!
+	</button>
+	<button mat-button [mat-dialog-close]="false" style="margin-bottom: 20px;">
+	  No,cancel
+	</button>
+  </div>
+  </div>
+  
+  

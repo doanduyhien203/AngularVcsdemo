@@ -1,0 +1,90 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div class="login100-pic js-tilt" data-tilt>
+        <img
+          *ngIf="1"
+          src="https://colorlib.com/etc/lf/Login_v1/images/img-01.png"
+          alt="IMG"
+        />
+      </div>
+      <form
+        class="login100-form validate-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <title class="login100-form-title">Sign in</title>
+        <div class="wrap-input100 form-group">
+          <mat-form-field appearance="outline">
+            <mat-label for="username">Username</mat-label>
+            <input
+              matInput
+              placeholder="Username"
+              formControlName="username"
+              [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+            />
+            <mat-error
+              style="font-size: 12px"
+              *ngIf="f['username'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['username'].errors['required']">
+                UserName is required!
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100 form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              [type]="showPassword ? 'text' : 'password'"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            />
+            <mat-error *ngIf="f['password'].errors" class="invalid-feedback">
+              <div *ngIf="f['password'].errors['required']">
+                Password is required
+              </div>
+            </mat-error>
+
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{ showPassword ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="wrap-input100">
+          <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+        </div>
+        <div class="container-login100-form-btn form-group">
+          <button
+            class="login100-form-btn"
+            style="margin-bottom: 20px"
+            mat-raised-button
+            color="primary"
+            type="submit"
+          >
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span>
+            Sign in
+          </button>
+
+          <div class="text-center p-t-12">
+            <a href="#">Forgot Username/Password?</a>
+          </div>
+        </div>
+
+        <hr class="line" style="max-width: 250px" />
+
+        <div class="form-group text-center p-t-136" style="max-width: 250px">
+          <a class="txt2" routerLink="../register"> Create new account </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

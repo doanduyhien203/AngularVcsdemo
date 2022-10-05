@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { DatePipe } from '@angular/common';
 import { USERS } from '../account/accounts';
 import { User } from '../_models/account';
 
+
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
+  constructor( ) {}
 
-  constructor( private datePipe: DatePipe) { }
-
-  
   accountList: any;
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -23,53 +22,51 @@ export class AccountService {
     email: new FormControl('', Validators.email),
     address: new FormControl(''),
     gender: new FormControl(''),
-
   });
 
   initializeFormGroup() {
     this.form.setValue({
       $key: null,
-      accountnumber:'',
-      balance:'',
+      accountnumber: '',
+      balance: '',
       firstName: '',
-      lastName:'',
+      lastName: '',
       email: '',
-        address:'',
+      address: '',
       gender: 'M',
     });
   }
 
-
   insertAccount(account) {
     this.accountList.push({
-    accountnumber: account.account_number,
-    balance:account.balance,
+      accountnumber: account.account_number,
+      balance: account.balance,
       firstName: account.firstname,
       lastName: account.lastname,
       email: account.email,
       ddress: account.address,
       gender: account.gender,
-      
     });
   }
   getAccount() {
     return USERS;
   }
   updateAccount(account) {
-    this.accountList.update(account.$key,
-      {
-        accountnumber: account.account_number,
-    balance:account.balance,
+    this.accountList.update(account.$key, {
+      accountnumber: account.account_number,
+      balance: account.balance,
       firstName: account.firstname,
       lastName: account.lastname,
-      
+
       email: account.email,
-    
+
       address: account.address,
       gender: account.gender,
-      });
+    });
   }
-  addAccount(formData: User){
+  addAccount(formData: User) {
     USERS.push(formData);
   }
+  
+  
 }
