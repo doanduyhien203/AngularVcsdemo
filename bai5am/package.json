@@ -28,6 +28,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
+    "ngx-pagination": "^6.0.2",
     "rxjs": "~7.5.0",
     "source-map-explorer": "^2.5.2",
     "tslib": "^2.3.0",

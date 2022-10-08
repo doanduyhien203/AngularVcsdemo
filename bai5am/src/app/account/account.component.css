@@ -1,13 +1,21 @@
 table {
   width: 100%;
+
 }
 
 .mat-elevation-z8 {
-
-  flex-direction: column;
+  border-radius: 25px;
   min-width: 1200px;
   margin-top: 40px;
 }
+.header-table{
+  display: flexbox;
+  flex: auto;
+  
+}
+  
+ 
+
 .mat-header-cell {
   text-transform: uppercase;
 }
@@ -154,7 +162,9 @@ button {
   font-size: 15px;
   width: 100%;
 }
-
+.title-table{
+  display: flex;
+}
 td,
 th {
   font-weight: 500;
@@ -166,10 +176,6 @@ th {
   cursor: pointer;
 }
 
-.filter {
-  left: 40px;
-  width: 25%;
-}
 ::ng-deep .mat-menu {
   display: flex;
   text-align: center;
@@ -194,9 +200,3 @@ th {
   
 }
 
-.filter__form{
-  float: right;
-  margin-top: -57px;
-  margin-right: 25px;
-  width: 110px;
-}

@@ -142,7 +142,7 @@ export class RegisterComponent implements OnInit {
           this.alertService.success('Registration successful', {
             keepAfterRouteChange: true,
           });
-          setTimeout(() =>this.router.navigate(['..'], { relativeTo: this.route }),2000);
+          setTimeout(() =>this.router.navigate(['..'], { relativeTo: this.route }),1000);
          
         },
         error: (error) => {

@@ -21,7 +21,7 @@ const validateMatchedControlsValue = (
       ) as AbstractControl;
       return firstControlValue === secondControlValue
         ? null
-        : {
+        : { notSame: true,
             valueNotMatch: {
               firstControlValue,
               secondControlValue,
@@ -29,7 +29,9 @@ const validateMatchedControlsValue = (
           };
     };
   };
-@Component({ templateUrl: 'add-edit.component.html' })
+@Component({ 
+    styleUrls:['./add-edit.css'],
+    templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form: FormGroup;
     id: string;

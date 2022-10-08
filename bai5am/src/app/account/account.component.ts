@@ -20,9 +20,8 @@ import {
 import { MatMenuTrigger } from '@angular/material/menu';
 
 import { AccountService } from '../_service/account.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
-import { ErrorDialogComponent } from '../noti-dialog/error-dialog/error-dialog.component';
 import { WarnDialogComponent } from '../noti-dialog/warn-dialog/warn-dialog.component';
 
 @Component({
@@ -42,8 +41,18 @@ export class AccountComponent implements AfterViewInit {
     'address',
     'action',
   ];
-  cols = new FormControl('ALL')
-  columnsToDisplay = this.displayedColumns.slice();
+  columnsToDisplay: string[] = [
+    'select',
+    'account_number',
+    'balance',
+    'firstname',
+    'email',
+    'gender',
+    'age',
+    'address',
+    'action',
+  ];
+
   data = Object.assign(USERS);
   dataSource = new MatTableDataSource<User>(this.data);
   selection = new SelectionModel<User>(true, []);
@@ -51,16 +60,7 @@ export class AccountComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
   @ViewChild(MatTable) table: MatTable<User>;
-
-
-
-
   
-   
-
-    
-  
- 
   constructor(
     public dialog: MatDialog,
     private datadialogRef: MatDialogRef<DataDialog>
@@ -68,10 +68,54 @@ export class AccountComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  
   }
   ngOnInit() {
     this.formSubscribe();
     this.getFormsValue();
+  
+  }
+  columns = new FormControl();
+
+  addColumn(colNameTemp: []) {
+    this.columnsToDisplay = [];
+    console.log('col..', JSON.stringify(colNameTemp));
+    for (var i = 0; i < colNameTemp.length; i++) {
+      this.columnsToDisplay.push(colNameTemp[i]);
+    }
+  }
+  capitalize(s: string): string {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+  copyData() {
+    return JSON.stringify(this.data);
+  }
+
+  refreshTable() {
+    this.columnsToDisplay = this.displayedColumns;
+  }
+  Paginator(){
+    this.paginator.page.subscribe(()=>
+    this.data
+    .getAccount('', '', this.paginator.pageIndex)
+    .subscribe(() => {
+      this.dataSource = new MatTableDataSource(
+        
+      );
+      
+    })
+    )
+  }
+ 
+  length = this.dataSource.data.length;
+  pageSize = 25;
+  pageSizeOptions: number[] = [10, 25, 100];
+
+  pageEvent: PageEvent;
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+   
   }
   addData() {
     const dialogConfig = new MatDialogConfig();
@@ -154,16 +198,7 @@ export class AccountComponent implements AfterViewInit {
       row.account_number + 1
     }`;
   }
-  length = this.data.length;
-  pageSize = 25;
-  pageSizeOptions: number[] = [10, 25, 100];
-  pageEvent: PageEvent;
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput
-      .split(',')
-      .map((str) => +str);
-  }
-  /*
+/*
   filterText = '';
 
   applyFilter(event: Event) {
@@ -182,14 +217,12 @@ export class AccountComponent implements AfterViewInit {
   filterValues = {
     gender: [],
     firstname: '',
-    lastname: '',
-    address: '',
+    
   };
   filterForm = new FormGroup({
     gender: new FormControl(),
     firstname: new FormControl(),
-    lastname: new FormControl(),
-    address: new FormControl(),
+   
   });
   get gender() {
     return this.filterForm.get('gender');
@@ -197,14 +230,9 @@ export class AccountComponent implements AfterViewInit {
   get firstname() {
     return this.filterForm.get('firstname');
   }
-  get lastname() {
-    return this.filterForm.get('lastname');
-  }
-  get address() {
-    return this.filterForm.get('address');
-  }
+  
   searchTerm;
-
+  
   formSubscribe() {
     this.gender.valueChanges.subscribe((genderValue) => {
       this.filterValues['gender'] = genderValue;
@@ -214,14 +242,7 @@ export class AccountComponent implements AfterViewInit {
       this.filterValues['firstname'] = firstnameValue;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
-    this.lastname.valueChanges.subscribe((lastnameValue) => {
-      this.filterValues['lastname'] = lastnameValue;
-      this.dataSource.filter = JSON.stringify(this.filterValues);
-    });
-    this.address.valueChanges.subscribe((addressValue) => {
-      this.filterValues['address'] = addressValue;
-      this.dataSource.filter = JSON.stringify(this.filterValues);
-    });
+    
   }
   updateSearch(e) {
     this.searchTerm = e.target.value;
@@ -230,7 +251,7 @@ export class AccountComponent implements AfterViewInit {
   getFormsValue() {
     this.dataSource.filterPredicate = (data, filter: string): boolean => {
       let searchString = JSON.parse(filter);
-
+      
       let isGenderAvailable = false;
       if (searchString.gender.length) {
         for (const d of searchString.gender) {
@@ -243,7 +264,8 @@ export class AccountComponent implements AfterViewInit {
       }
       const resultValue =
         isGenderAvailable &&
-        (data.firstname
+        (
+          data.firstname
           .toString()
           .trim()
           .toLowerCase()
@@ -257,12 +279,13 @@ export class AccountComponent implements AfterViewInit {
             .toString()
             .trim()
             .toLowerCase()
-            .includes(searchString.firstname));
-
+            .includes(searchString.firstname)
+        )
+        
       return resultValue;
     };
 
-    this.dataSource.filter = JSON.stringify(this.filterValues);
+      this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 }
 
@@ -280,8 +303,7 @@ export class DataDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: User,
     private dataService: AccountService
   ) {}
-  length = this.dataService.getAccount().length + 1;
-  ageControl = new FormControl('', [Validators.min(15),Validators.max(100)]);
+  length=this.dataService.getAccount().length +1;
   onYesClick(): void {
     this.dialogRef.close(false);
   }
@@ -292,7 +314,6 @@ export class DataDialog implements OnInit {
     this.dataService.addAccount(formData);
     this.dialogRef.close(false);
   }
-
   successclick() {
     const dialogRef = this.dialog.open(SuccessDialogComponent, {});
   }
@@ -306,11 +327,12 @@ export class DataDialog implements OnInit {
 export class EditDialog {
   constructor(
     public dialog: MatDialog,
-
+    private dataService: AccountService,
     public dialogRef: MatDialogRef<EditDialog>,
     @Inject(MAT_DIALOG_DATA) public data: User
   ) {}
 
+ 
   onNoClick(): void {
     this.dialogRef.close();
   }

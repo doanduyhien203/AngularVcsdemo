@@ -21,7 +21,7 @@
       >
         <mat-icon>manage_accounts</mat-icon>
       </button>
-      <button mat-icon-button class="log-out" routerLink="../login">
+      <button mat-icon-button class="log-out" (click)="logout()" routerLink="/login">
         <mat-icon color="#ba4c00">logout</mat-icon>
       </button>
     </div>

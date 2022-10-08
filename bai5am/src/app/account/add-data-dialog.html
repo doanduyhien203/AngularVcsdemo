@@ -2,15 +2,14 @@
   <div class="example-container">
     <input type="hidden" ngModel name="id" />
     <div mat-dialog-title>Add Account {{length}}</div>
-    <mat-form-field appearance="fill">
-      <mat-label>Account number</mat-label>
+    <mat-form-field>
       <input
         matInput
         type="number"
         name="account_number"
         required
         ngModel
-        placeholder={{length}} 
+        placeholder="Account_number"
       />
     </mat-form-field>
 
@@ -71,15 +70,12 @@
       <input
         matInput
         type="number"
-        min="15"
-        max="100"
+      
         name="age"
         required
         ngModel
         placeholder="Age"
-        [formControl]="ageControl"
       />
-      <mat-error *ngIf="ageControl.invalid">Input from 15 to 100</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input

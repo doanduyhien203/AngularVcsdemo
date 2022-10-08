@@ -14,5 +14,7 @@ export class HomeComponent  {
     constructor(private loginService: UserLoginService) {
         this.user = this.loginService.userValue;
     }
-
+    logout() {
+      this.loginService.logout();
+  }
 }
