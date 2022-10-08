@@ -3,7 +3,7 @@
   <mat-form-field appearance="standard" class="filter">
     <mat-label>
       <mat-icon style="transform: scale(1.25); margin-right: 10px"
-        >search</mat-icon
+        >searchs</mat-icon
       >Search
     </mat-label>
     <input
@@ -51,6 +51,14 @@
       </mat-form-field>
     </div>
   </form>
+  <mat-form-field class="">
+    <mat-label>Select Columns</mat-label>
+    <mat-select [formControl]="cols" placeholder="Columns">
+      <ng-container *ngFor="let b of displayedColumns">
+        <mat-option [value]="b">{{b}}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
 
   <table mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select">
@@ -213,7 +221,10 @@
     </tr>
   </table>
   <mat-paginator
-    [pageSizeOptions]="[10, 25, 100]"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageEvent = $event"
     aria-label="Select page of users"
   ></mat-paginator>
 </div>

@@ -8,7 +8,7 @@ import {
 import { User } from '../_models/account';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { USERS } from './accounts';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
@@ -20,7 +20,7 @@ import {
 import { MatMenuTrigger } from '@angular/material/menu';
 
 import { AccountService } from '../_service/account.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SuccessDialogComponent } from '../noti-dialog/success-dialog/success-dialog.component';
 import { ErrorDialogComponent } from '../noti-dialog/error-dialog/error-dialog.component';
 import { WarnDialogComponent } from '../noti-dialog/warn-dialog/warn-dialog.component';
@@ -42,6 +42,7 @@ export class AccountComponent implements AfterViewInit {
     'address',
     'action',
   ];
+  cols = new FormControl('ALL')
   columnsToDisplay = this.displayedColumns.slice();
   data = Object.assign(USERS);
   dataSource = new MatTableDataSource<User>(this.data);
@@ -51,6 +52,15 @@ export class AccountComponent implements AfterViewInit {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
   @ViewChild(MatTable) table: MatTable<User>;
 
+
+
+
+  
+   
+
+    
+  
+ 
   constructor(
     public dialog: MatDialog,
     private datadialogRef: MatDialogRef<DataDialog>
@@ -144,7 +154,16 @@ export class AccountComponent implements AfterViewInit {
       row.account_number + 1
     }`;
   }
-/*
+  length = this.data.length;
+  pageSize = 25;
+  pageSizeOptions: number[] = [10, 25, 100];
+  pageEvent: PageEvent;
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput
+      .split(',')
+      .map((str) => +str);
+  }
+  /*
   filterText = '';
 
   applyFilter(event: Event) {
@@ -185,7 +204,7 @@ export class AccountComponent implements AfterViewInit {
     return this.filterForm.get('address');
   }
   searchTerm;
-  
+
   formSubscribe() {
     this.gender.valueChanges.subscribe((genderValue) => {
       this.filterValues['gender'] = genderValue;
@@ -211,7 +230,7 @@ export class AccountComponent implements AfterViewInit {
   getFormsValue() {
     this.dataSource.filterPredicate = (data, filter: string): boolean => {
       let searchString = JSON.parse(filter);
-      
+
       let isGenderAvailable = false;
       if (searchString.gender.length) {
         for (const d of searchString.gender) {
@@ -224,8 +243,7 @@ export class AccountComponent implements AfterViewInit {
       }
       const resultValue =
         isGenderAvailable &&
-        (
-          data.firstname
+        (data.firstname
           .toString()
           .trim()
           .toLowerCase()
@@ -239,20 +257,19 @@ export class AccountComponent implements AfterViewInit {
             .toString()
             .trim()
             .toLowerCase()
-            .includes(searchString.firstname)
-        )
-        
+            .includes(searchString.firstname));
+
       return resultValue;
     };
 
-      this.dataSource.filter = JSON.stringify(this.filterValues);
+    this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 }
 
 @Component({
   selector: 'data-dialog',
-  templateUrl: './data-dialog.html',
-  styleUrls: ['./data-dialog.css'],
+  templateUrl: './add-data-dialog.html',
+  styleUrls: ['./add-data-dialog.css'],
 })
 export class DataDialog implements OnInit {
   dataSource = new MatTableDataSource<User>();
@@ -263,7 +280,8 @@ export class DataDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: User,
     private dataService: AccountService
   ) {}
-
+  length = this.dataService.getAccount().length + 1;
+  ageControl = new FormControl('', [Validators.min(15),Validators.max(100)]);
   onYesClick(): void {
     this.dialogRef.close(false);
   }
@@ -274,6 +292,7 @@ export class DataDialog implements OnInit {
     this.dataService.addAccount(formData);
     this.dialogRef.close(false);
   }
+
   successclick() {
     const dialogRef = this.dialog.open(SuccessDialogComponent, {});
   }
@@ -281,8 +300,8 @@ export class DataDialog implements OnInit {
 
 @Component({
   selector: 'dialog-overview-example-dialog',
-  templateUrl: './dialog.html',
-  styleUrls: ['./dialog.css'],
+  templateUrl: './edit-dialog.html',
+  styleUrls: ['./edit-dialog.css'],
 })
 export class EditDialog {
   constructor(
