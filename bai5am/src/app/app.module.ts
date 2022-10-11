@@ -19,7 +19,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MatSortModule } from '@angular/material/sort';
 import { AlertComponent } from './alert/alert.component';
 import { HighlightSearchPipe } from './account/highlightable-search.pipe';
-import { MatGridListModule } from '@angular/material/grid-list';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,8 +44,7 @@ import {SuccessDialogComponent } from './noti-dialog/success-dialog/success-dial
 import {MatRadioModule} from '@angular/material/radio';
 import { WarnDialogComponent } from './noti-dialog/warn-dialog/warn-dialog.component';
 import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.component';
-
-
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   imports: [
@@ -64,7 +63,7 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
     MatMenuModule,
     MatToolbarModule,
     MatSortModule,
-    MatGridListModule,
+
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -73,6 +72,7 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
     MatIconModule,
     MatRadioModule,
     MatSidenavModule,
+  
     AppRoutingModule,
 
   ],
@@ -91,7 +91,8 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
     ListComponent,
     SuccessDialogComponent,
     WarnDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ChartComponent
 
   ],
   bootstrap: [AppComponent],

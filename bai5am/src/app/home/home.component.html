@@ -8,22 +8,38 @@
         aria-label="Example icon-button with menu icon"
         (click)="drawer.toggle()"
       >
-        <mat-icon style="margin-bottom: 8px;">menu</mat-icon>
+        <mat-icon style="margin-bottom: 8px">menu</mat-icon>
       </button>
-      <span class="side-title" >My App</span>
+      <span class="side-title">My App</span>
       <div style="margin-left: 150px">
         <h1>Account List</h1>
       </div>
+      
       <button
+        class="setting_account"
         mat-icon-button
-        class="user-edit"
-        routerLink="../edit/{{ user.id }}"
+        [matMenuTriggerFor]="menu"
+        #menuTrigger="matMenuTrigger"
+        (mouseover)="menuTrigger.openMenu()"
       >
-        <mat-icon>manage_accounts</mat-icon>
+     
+      <mat-icon>account_circle</mat-icon>
+   
+     
       </button>
-      <button mat-icon-button class="log-out" (click)="logout()" routerLink="/login">
-        <mat-icon color="#ba4c00">logout</mat-icon>
-      </button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <span (mouseleave)="menuTrigger.closeMenu()">
+          <button mat-menu-item routerLink="../edit/{{ user.id }}">
+            <mat-icon>manage_accounts</mat-icon>
+            <span>Edit User</span>
+          </button>
+
+          <button mat-menu-item (click)="logout()" routerLink="/login">
+            <mat-icon color="#ba4c00">logout</mat-icon>
+            <span>Log out</span>
+          </button>
+        </span>
+      </mat-menu>
     </div>
   </mat-toolbar>
 </p>
@@ -50,9 +66,9 @@
           Outbox
         </a>
       </div>
-      <div class="side-item">
-        <a style="font-size: 18px">
-          <span class="icon-container">
+      <div class="side-item" routerLink="/chart">
+        <a style="font-size: 18px" >
+          <span class="icon-container" >
             <i class="material-icons" style="margin-right: 10px">favorite</i>
           </span>
           Favorites
@@ -94,9 +110,21 @@
       <hr class="line" />
       <!-- End of sample content for demonstration purposes. -->
     </div>
+    <button
+      mat-stroked-button
+      style="position: absolute; left: 45px; bottom: 100px"
+    >
+      <a
+        href="https://github.com/doanduyhien203/AngularVcsdemo"
+        target="_blank"
+        rel="noopener"
+      >
+        Docs & Components</a
+      >
+    </button>
   </mat-drawer>
 
-  <div class="example-sidenav-content" >
+  <div class="example-sidenav-content">
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

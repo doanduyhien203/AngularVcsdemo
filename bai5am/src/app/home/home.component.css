@@ -21,6 +21,10 @@
   background-color: #d2daff;
   cursor: pointer;
 }
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
 
 .example-container {
   min-height: 100%;
@@ -45,6 +49,7 @@
   background-color: #dce0f5;
   position: fixed;
   margin-top: 64px;
+
 }
 
 .side-title:hover span {
@@ -56,20 +61,12 @@
   margin: 0px;
 }
 
-.log-out {
+.setting_account {
   position: absolute;
   right: 50px;
 }
-.user-edit {
-  position: absolute;
-  right: 120px;
-}
-.user-edit:hover {
-  color: #ba4c00;
-}
-.log-out:hover {
-  color: #ba4c00;
-}
+
+
 .ng-icon-sidebar {
   left: 0;
   height: 100%;

@@ -26,18 +26,19 @@
 
     <form [formGroup]="filterForm" style="margin-left: 30px">
       <div class="form-group">
-        <mat-form-field style="float: left; width: 300px; margin-top: 25px">
+        <mat-form-field style="float: left; width: 250px; margin-top: 25px">
           <input
             matInput
             (input)="updateSearch($event)"
             formControlName="firstname"
-            placeholder="search name or address"
+            placeholder="Search name or address"
           />
         </mat-form-field>
 
         <mat-form-field
           style="width: 120px; margin-left: 10px; margin-top: 25px"
         >
+          <mat-label>Gender</mat-label>
           <mat-select formControlName="gender" multiple>
             <mat-option value="M">Male</mat-option>
             <mat-option value="F">Female</mat-option>
@@ -46,7 +47,7 @@
 
         <mat-form-field
           class="form-group"
-          style="width: 200px; margin-left: 10px; margin-top: 25px"
+          style="width: 170px; margin-left: 10px; margin-top: 25px"
         >
           <mat-label>Columns</mat-label>
           <mat-select
@@ -142,18 +143,6 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        sortActionDescription="Sort by email"
-      >
-        Email
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="gender">
       <th
         mat-header-cell
@@ -182,6 +171,18 @@
         Age
       </th>
       <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+
+      <ng-container matColumnDef="email">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by email"
+        >
+          Email
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
     </ng-container>
     <ng-container matColumnDef="address">
       <th
