@@ -44,15 +44,35 @@ import {SuccessDialogComponent } from './noti-dialog/success-dialog/success-dial
 import {MatRadioModule} from '@angular/material/radio';
 import { WarnDialogComponent } from './noti-dialog/warn-dialog/warn-dialog.component';
 import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.component';
-import { ChartComponent } from './chart/chart.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
+import { UserLoginService } from './_service/userlogin.service';
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCUIwimGbxv7lPUBoSrYxl7ljb3U-z_HQ8",
+  authDomain: "angular-auth-91c1e.firebaseapp.com",
+  databaseURL: "https://angular-auth-91c1e-default-rtdb.firebaseio.com",
+  projectId: "angular-auth-91c1e",
+  storageBucket: "angular-auth-91c1e.appspot.com",
+  messagingSenderId: "64028441600",
+  appId: "1:64028441600:web:29d6ef215dd56c37206ce5",
+  measurementId: "G-9W4MD1H3P0"
+};
+
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule,  
     CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     MatInputModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     MatCheckboxModule,
     MatButtonModule,
     FormsModule,
@@ -63,7 +83,6 @@ import { ChartComponent } from './chart/chart.component';
     MatMenuModule,
     MatToolbarModule,
     MatSortModule,
-
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -92,7 +111,7 @@ import { ChartComponent } from './chart/chart.component';
     SuccessDialogComponent,
     WarnDialogComponent,
     ErrorDialogComponent,
-    ChartComponent
+  
 
   ],
   bootstrap: [AppComponent],
@@ -102,6 +121,7 @@ import { ChartComponent } from './chart/chart.component';
 
     // provider used to create fake backend
     fakeBackendProvider,
+    UserLoginService,
     DatePipe,
     {
       provide: MatDialogRef,

@@ -4,13 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AlertService } from '../_service/alert.service';
 import { UserLoginService } from '../_service/userlogin.service';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import firebase from 'firebase/compat/app';
 @Component({
   selector: 'app-sign-in-rf',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  providers: [AngularFireAuth],
 })
 export class LoginComponent implements OnInit {
+  user;
+  userdetails;
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -23,10 +28,16 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: UserLoginService,
-    private alertService: AlertService
+    public loginService: UserLoginService,
+    private alertService: AlertService,
+    private angularFireDB: AngularFireDatabase,
+    public afAuth: AngularFireAuth
   ) {
     // redirect to home if already logged in
+    this.user = afAuth.authState;
+    this.user.subscribe((res) => {
+      this.userdetails = res;
+    });
 
     if (this.loginService.userValue) {
       this.router.navigate(['/']);
@@ -65,13 +76,14 @@ export class LoginComponent implements OnInit {
       .login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
-        next: (_data )=> {
+        next: (_data) => {
           this.router.navigate([this.returnUrl]);
         },
         error: (error) => {
           this.alertService.error(error);
           this.loading = false;
-        }}
-      );
+        },
+      });
   }
+
 }

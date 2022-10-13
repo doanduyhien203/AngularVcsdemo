@@ -11,10 +11,13 @@ export class HomeComponent  {
 
   user: UserLogin;
 
-    constructor(private loginService: UserLoginService) {
+    constructor(public loginService: UserLoginService) {
         this.user = this.loginService.userValue;
+       
     }
+   
     logout() {
       this.loginService.logout();
   }
+   show = this.loginService.userValue.displayName; 
 }

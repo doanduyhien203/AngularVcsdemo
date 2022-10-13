@@ -29,11 +29,13 @@
       </button>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <span (mouseleave)="menuTrigger.closeMenu()">
+          <div *ngIf="!show">
           <button mat-menu-item routerLink="../edit/{{ user.id }}">
+           
             <mat-icon>manage_accounts</mat-icon>
             <span>Edit User</span>
-          </button>
-
+          </button></div>
+        
           <button mat-menu-item (click)="logout()" routerLink="/login">
             <mat-icon color="#ba4c00">logout</mat-icon>
             <span>Log out</span>
@@ -46,7 +48,10 @@
 <mat-drawer-container class="example-container">
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <div ng-icon-sidebar>
-      <h1>Hi {{ user.username }}</h1>
+      <div *ngIf="show ; else loginpass">
+        <h1>Hi {{ user.displayName }}</h1>
+      </div>
+      <ng-template #loginpass> <h1 >Hi {{ user.username }}</h1></ng-template>
       <hr class="line" />
       <!-- Your content goes here, inside the sidebar's tag. This sample content exists for demonstration purposes. -->
 

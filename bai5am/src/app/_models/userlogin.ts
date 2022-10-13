@@ -3,8 +3,9 @@ export class UserLogin {
     email:string;
     username: string;
     password: string;  
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    displayName: string;
+    lastName?: string;
     confirmPassword:string;
     token: string;
 }

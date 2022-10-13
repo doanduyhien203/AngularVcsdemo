@@ -44,7 +44,7 @@ export class AccountService {
       firstName: account.firstname,
       lastName: account.lastname,
       email: account.email,
-      ddress: account.address,
+      address: account.address,
       gender: account.gender,
     });
   }

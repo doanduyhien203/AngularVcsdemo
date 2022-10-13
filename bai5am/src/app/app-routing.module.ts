@@ -9,6 +9,7 @@ import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.co
 import { RegisterComponent } from './register/register.component';
 import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
