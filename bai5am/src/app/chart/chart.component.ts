@@ -1,6 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { USERS } from '../account/accounts';
 import { User } from '../_models/account';
@@ -16,15 +17,18 @@ arr = arr.slice(Math.min(arr.length, 0));
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
+  styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit {
   public chart: Chart;
+  
 
-  constructor() {
+  constructor(private router: Router,) {
     Chart.register(...registerables);
   }
-
+  click_avatar(){
+    this.router.navigate(['/login'])
+  };
   ngOnInit() {
     this.chart = new Chart('canvas', {
       type: 'bar',

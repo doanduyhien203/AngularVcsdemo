@@ -59,6 +59,12 @@
         <div class="wrap-input100">
           <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
         </div>
+        <div class="formGroup">
+          <button type="button" class="btn googleBtn" (click)="loginService.GoogleAuth()">
+            <i class="fab fa-google-plus-g"></i>
+            Log in with Google
+          </button>
+        </div>
         <div class="container-login100-form-btn form-group">
           <button
             class="login100-form-btn"
@@ -85,12 +91,7 @@
           <a class="txt2" routerLink="../register"> Create new account </a>
         </div>
       </form>
-      <div class="formGroup">
-        <button type="button" class="btn googleBtn" (click)="loginService.GoogleAuth()">
-          <i class="fab fa-google-plus-g"></i>
-          Log in with Google
-        </button>
-      </div>
+      
       
     </div>
   </div>

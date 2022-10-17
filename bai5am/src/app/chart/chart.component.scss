@@ -1,0 +1,25 @@
+.avatar_btn  ::ng-deep .mat-button-wrapper{
+  padding:0;
+  border: none;
+background: none;
+outline: none;
+
+     border-color: aliceblue;
+   
+}
+.avatar {
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-color: aliceblue;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .avatar_img{
+    height: 100%;
+    width: 100%;
+    border-color: aliceblue;
+  }

@@ -1,4 +1,18 @@
 <div style="display: block; width: 400px">
-    <canvas id="canvas" height="320">{{ chart }}</canvas>
-  </div>
+  <canvas id="canvas" height="320">{{ chart }}</canvas>
+</div>
+<button
+  class="avatar_btn"
+  style="padding: 0; border: none; background: none"
+  routerLink="../login"
+  (click)="click_avatar()"
+>
+  <div class="avatar"  >
   
+    <img
+      class="avatar_img"
+      src="https://www.fillmurray.com/140/140"
+      
+    />
+  </div>
+</button>
