@@ -56,6 +56,7 @@ export class AccountComponent implements AfterViewInit {
   data = Object.assign(USERS);
   dataSource = new MatTableDataSource<User>(this.data);
   selection = new SelectionModel<User>(true, []);
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
@@ -124,10 +125,13 @@ export class AccountComponent implements AfterViewInit {
   }
 
   user;
+  ischange: boolean[] = [false];
   editUser(user) {
+    this.data.ischange = true
     const dialogRef = this.dialog.open(EditDialog, {
       width: '350px',
       data: user,
+      
     });
 
     dialogRef.afterClosed().subscribe((result) => {

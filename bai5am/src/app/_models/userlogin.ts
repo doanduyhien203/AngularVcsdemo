@@ -8,4 +8,5 @@ export class UserLogin {
     lastName?: string;
     confirmPassword:string;
     token: string;
+    uid: string;
 }

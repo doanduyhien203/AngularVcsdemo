@@ -28,7 +28,6 @@ import {
   AccountComponent,
   DataDialog,
   EditDialog,
- 
 } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -40,8 +39,8 @@ import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MatSelectModule } from '@angular/material/select';
 import { AddEditComponent } from './users/add-edit.component';
 import { ListComponent } from './users/list.component';
-import {SuccessDialogComponent } from './noti-dialog/success-dialog/success-dialog.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { SuccessDialogComponent } from './noti-dialog/success-dialog/success-dialog.component';
+import { MatRadioModule } from '@angular/material/radio';
 import { WarnDialogComponent } from './noti-dialog/warn-dialog/warn-dialog.component';
 import { ErrorDialogComponent } from './noti-dialog/error-dialog/error-dialog.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -49,23 +48,22 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { UserLoginService } from './_service/userlogin.service';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 var firebaseConfig = {
-  apiKey: "AIzaSyCUIwimGbxv7lPUBoSrYxl7ljb3U-z_HQ8",
-  authDomain: "angular-auth-91c1e.firebaseapp.com",
-  databaseURL: "https://angular-auth-91c1e-default-rtdb.firebaseio.com",
-  projectId: "angular-auth-91c1e",
-  storageBucket: "angular-auth-91c1e.appspot.com",
-  messagingSenderId: "64028441600",
-  appId: "1:64028441600:web:29d6ef215dd56c37206ce5",
-  measurementId: "G-9W4MD1H3P0"
+  apiKey: 'AIzaSyCUIwimGbxv7lPUBoSrYxl7ljb3U-z_HQ8',
+  authDomain: 'angular-auth-91c1e.firebaseapp.com',
+  databaseURL: 'https://angular-auth-91c1e-default-rtdb.firebaseio.com',
+  projectId: 'angular-auth-91c1e',
+  storageBucket: 'angular-auth-91c1e.appspot.com',
+  messagingSenderId: '64028441600',
+  appId: '1:64028441600:web:29d6ef215dd56c37206ce5',
+  measurementId: 'G-9W4MD1H3P0',
 };
-
 
 @NgModule({
   imports: [
-    BrowserModule,  
+    BrowserModule,
     CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -91,9 +89,9 @@ var firebaseConfig = {
     MatIconModule,
     MatRadioModule,
     MatSidenavModule,
-  
-    AppRoutingModule,
 
+    AppRoutingModule,
+    FontAwesomeModule,
   ],
 
   declarations: [
@@ -111,8 +109,6 @@ var firebaseConfig = {
     SuccessDialogComponent,
     WarnDialogComponent,
     ErrorDialogComponent,
-  
-
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -126,8 +122,7 @@ var firebaseConfig = {
     {
       provide: MatDialogRef,
       useValue: {},
-    }, 
-  
+    },
   ],
 })
 export class AppModule {}

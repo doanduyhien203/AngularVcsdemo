@@ -14,7 +14,7 @@
       <div style="margin-left: 150px">
         <h1>Account List</h1>
       </div>
-      
+     
       <button
         class="setting_account"
         mat-icon-button
@@ -50,6 +50,7 @@
     <div ng-icon-sidebar>
       <div *ngIf="show ; else loginpass">
         <h1>Hi {{ user.displayName }}</h1>
+        <h1>Hi {{ user.uid }}</h1>
       </div>
       <ng-template #loginpass> <h1 >Hi {{ user.username }}</h1></ng-template>
       <hr class="line" />

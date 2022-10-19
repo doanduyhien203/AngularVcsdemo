@@ -19,7 +19,7 @@ export class UserLoginService {
     userData: any;
 
     constructor(
-        public afs: AngularFirestore, 
+        private readonly afs: AngularFirestore, 
         public afAuth: AngularFireAuth,
         private router: Router,
         private http: HttpClient
@@ -96,6 +96,7 @@ export class UserLoginService {
         return (user !== null ) ? true : false;
       }
       // Sign in with Google
+      
       GoogleAuth() {
         return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
           this.router.navigate(['/home']);
@@ -117,22 +118,27 @@ export class UserLoginService {
       sign up with username/password and sign in with social auth  
       provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
       SetUserData(user: any) {
+        /*
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(
           `users/${user.displayName}`
-        );
+        );*/
         const userData: UserLogin = {
-            id: user.id,
+            id: '',
+            uid:user.uid,
+            
             email: user.email,
             displayName: user.displayName,
             username: user.displayName,
             password: '',
             confirmPassword: '',
             token: '',
-            
+           
         };
+        /*
         return userRef.set(userData, {
           merge: true,
         });
+        */
       }
     getAll() {
         return this.http.get<UserLogin[]>(`${environment.apiUrl}/users`);

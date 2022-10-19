@@ -6,9 +6,8 @@ import { AlertService } from '../_service/alert.service';
 import { UserLoginService } from '../_service/userlogin.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import firebase from 'firebase/compat/app';
 @Component({
-  selector: 'app-sign-in-rf',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   providers: [AngularFireAuth],
@@ -19,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  
   returnUrl: string;
   public showPassword: boolean = false;
   public togglePasswordVisibility(): void {
@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     public loginService: UserLoginService,
     private alertService: AlertService,
-    private angularFireDB: AngularFireDatabase,
     public afAuth: AngularFireAuth
   ) {
     // redirect to home if already logged in

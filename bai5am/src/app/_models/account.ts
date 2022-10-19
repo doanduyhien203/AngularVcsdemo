@@ -11,5 +11,5 @@ export interface User {
     employer: string;
     email: string;
     city: string;
-    state: string;
+    state: string;  
   }

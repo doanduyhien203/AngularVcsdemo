@@ -107,7 +107,7 @@
       >
         No.
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.account_number }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.account_number }} <div>sdfa</div></td>
     </ng-container>
 
     <ng-container matColumnDef="balance">
@@ -128,19 +128,26 @@
         *matHeaderCellDef
         mat-sort-header
         sortActionDescription="Sort by name"
+        
       >
+      
         Name
       </th>
       <td
         mat-cell
         *matCellDef="let element"
         [innerHTML]="
-          element.firstname + ' ' + element.lastname
+          element.firstname + ' ' + element.lastname + ''
             | highlightSearch: searchTerm
+          
         "
-      >
-        {{ element.firstname }} {{ element.lastname }}
+       
+      > 
+      
+        
       </td>
+      
+      
     </ng-container>
 
     <ng-container matColumnDef="gender">
